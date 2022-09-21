@@ -1,0 +1,1 @@
+//Solution to Stone,paper and scissor problem(Ctut51Ex9.c)
