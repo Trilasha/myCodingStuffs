@@ -14,7 +14,6 @@ using namespace std;
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
 #define maxval                1000000007
 #define PI                    3.141592653589793238
-#define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
 #define inp(n)                ll n;cin>>n;
 #define inpv(v)               for(auto &x: v) cin>>x;
@@ -37,7 +36,54 @@ using namespace std;
     
     
 void solve(){
-    
+    inp(n);
+    string s;
+    cin>>s;
+    ll ctz=count(all(s),'0');
+    ll cto=count(all(s),'1');
+    if(ctz==0 || cto==0)
+    {
+        cout<<s.size()<<" "<<0<<endl;
+        return;
+    }
+    if(cto==ctz)
+    {
+        cout<<1<<" "<<1<<endl;
+        cout<<1<<" "<<s.size()<<" "<<1<<endl;
+        return;
+    }
+    cout<<1<<" "<<max(cto,ctz)-min(cto,ctz)+1<<endl;
+    ll set=0;
+    while(cto!=ctz)
+    {
+        string ans="";
+        set=0;
+        for(ll i=0;i<s.size();++i)
+        {
+            if(i!=s.size()-1 && s[i]!=s[i+1] && set==0)
+            {
+                set=1;
+                cout<<i+1<<" "<<i+2<<" ";
+                if(cto>ctz)
+                {
+                    cout<<'1'<<endl;
+                    cto++;
+                    ans+='1';
+                }
+                else
+                {
+                    cout<<'0'<<endl;
+                    ctz++;
+                    ans+='0';
+                }
+                i++;
+            }
+            else
+            ans+=s[i];
+        }
+        s=ans;
+    }
+    cout<<1<<" "<<s.size()<<endl;
 }
     
 int main(){

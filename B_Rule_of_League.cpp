@@ -14,7 +14,6 @@ using namespace std;
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
 #define maxval                1000000007
 #define PI                    3.141592653589793238
-#define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
 #define inp(n)                ll n;cin>>n;
 #define inpv(v)               for(auto &x: v) cin>>x;
@@ -37,7 +36,56 @@ using namespace std;
     
     
 void solve(){
-    
+    ll n,x,y;
+    cin>>n>>x>>y;
+    if(x!=0 && y!=0 ||(x==0 && y==0))
+    {
+        cout<<-1<<endl;
+        return;
+    }
+    if(x==0)
+    {
+        if((n-1)%y!=0)
+        {
+            cout<<-1<<endl;
+            return;
+        }
+    }
+    if(y==0)
+    {
+        if((n-1)%x!=0)
+        {
+            cout<<-1<<endl;
+            return;
+        }
+    }
+    ll index=1;
+    vector<ll> ans;
+    if(x!=0)
+    {
+        ll temp=x;
+        while(ans.size()!=n-1)
+        {
+           while (temp--)
+            ans.pb(index);
+            temp=x;
+            index+=x+1;
+        }
+    }
+    else if(y!=0)
+    {
+        ll temp=y;
+        while(ans.size()!=n-1)
+        {
+           while (temp--)
+            ans.pb(index);
+            temp=y;
+            index+=y+1;
+        }
+    }
+    ans.back()= min(ans.back(), n);
+    printv(ans);
+
 }
     
 int main(){

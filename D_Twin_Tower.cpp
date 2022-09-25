@@ -14,7 +14,6 @@ using namespace std;
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
 #define maxval                1000000007
 #define PI                    3.141592653589793238
-#define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
 #define inp(n)                ll n;cin>>n;
 #define inpv(v)               for(auto &x: v) cin>>x;

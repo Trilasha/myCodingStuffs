@@ -14,7 +14,6 @@ using namespace std;
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
 #define maxval                1000000007
 #define PI                    3.141592653589793238
-#define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
 #define inp(n)                ll n;cin>>n;
 #define inpv(v)               for(auto &x: v) cin>>x;
@@ -37,7 +36,78 @@ using namespace std;
     
     
 void solve(){
-    
+   inp(r);
+   inp(col);
+   ll ct=0;
+   ll ct1=0,ct2=0,ct3=0,ct4=0;
+   ll ans=0;
+   ll mini=INT_MAX;
+   ll a,b,c;
+   vector<string> v(r);
+   fr(i,r)
+   {
+   cin>>v[i];
+   ct+=count(v[i].begin(),v[i].end(),'1');
+   }
+   if(ct==0)
+   {
+    cout<<0<<endl;
+    return;
+   }
+   for(ll i=0;i<r-1;++i)
+   {
+    for(ll j=0;j<col-1;++j)
+    {
+        a=v[i][j]-'0';
+        b=v[i][j+1]-'0';
+        c=v[i+1][j+1]-'0';
+        ans=a+b+c;
+        if(ans==0 || ans==1)
+        {
+            cout<<ct<<endl;
+            return;
+        }
+        mini=min(mini,ans);
+        //
+         a=v[i][j+1]-'0';
+        b=v[i+1][j+1]-'0';
+        c=v[i+1][j]-'0';
+        ans=a+b+c;
+        if(ans==0 || ans==1)
+        {
+            cout<<ct<<endl;
+            return;
+        }
+        else
+        mini=min(mini,ans);
+        //
+         a=v[i+1][j+1]-'0';
+        b=v[i+1][j]-'0';
+        c=v[i][j]-'0';
+        ans=a+b+c;
+        if(ans==0 || ans==1)
+        {
+            cout<<ct<<endl;
+            return;
+        }
+         else
+        mini=min(mini,ans);
+        //
+         a=v[i+1][j]-'0';
+        b=v[i][j]-'0';
+        c=v[i][j+1]-'0';
+        ans=a+b+c;
+        if(ans==0 || ans==1)
+        {
+            cout<<ct<<endl;
+            return;
+        }
+         else
+        mini=min(mini,ans);
+
+    }
+   }
+   cout<<ct-mini+1<<endl;
 }
     
 int main(){

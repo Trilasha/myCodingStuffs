@@ -14,7 +14,6 @@ using namespace std;
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
 #define maxval                1000000007
 #define PI                    3.141592653589793238
-#define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
 #define inp(n)                ll n;cin>>n;
 #define inpv(v)               for(auto &x: v) cin>>x;
@@ -37,7 +36,20 @@ using namespace std;
     
     
 void solve(){
-    
+    inp(n);
+    vector<ll> v(n);
+    inpv(v);
+    allasort(v);
+    ll a=0;
+    ll b=0;
+    ll mini=INT_MAX;
+    for(ll i=0;i<n-2;++i)
+    {
+        a=v[i+1]-v[i];
+        b=v[i+2]-v[i+1];
+        mini=min(mini,a+b);
+    }
+    cout<<mini<<endl;
 }
     
 int main(){
