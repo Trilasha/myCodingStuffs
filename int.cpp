@@ -89,12 +89,11 @@ void solve()
    sorting(s,v.size());
    
 
-  // stack<ll> output=s;
-  //cout<<s.size();
+   stack<ll> output=s;
    for(ll i=0;i<n;++i)
    {
-    cout<<s.top()<<" ";
-    s.pop();
+    cout<<output.top()<<" ";
+    output.pop();
    }
    cout<<endl;
 
