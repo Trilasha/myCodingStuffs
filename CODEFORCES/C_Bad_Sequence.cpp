@@ -11,7 +11,6 @@ using namespace std;
 #define uset                  unordered_set
 #define ff                    first
 #define ss                    second
-#define pi                    pair<ll,ll> 
 #define maxpq                 priority_queue <ll> pq;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
@@ -40,7 +39,42 @@ using namespace std;
     
     
 void solve(){
-   
+    inp(n);
+    string s;
+    cin>>s;
+    stack<char> o;
+    stack<char> c;
+    for(auto &i:s)
+    {
+        if(i=='(')
+        {
+            o.push(i);
+        }
+        else
+        {
+            if(o.empty())
+            c.push(i);
+            else
+            o.pop();
+        }
+    }
+    if(o.empty() && !c.empty())
+    {
+    cout<<"No"<<endl;
+    return;
+    }
+    else if(o.empty() && c.empty())
+    {
+    cout<<"Yes"<<endl;
+    return;
+    }
+    else if(o.size()==1 && c.size()==1)
+    {
+    cout<<"Yes"<<endl;
+    return;
+    }
+    else
+    cout<<"No"<<endl;
 }
     
 int main(){
@@ -50,7 +84,8 @@ cin.tie(NULL);
 
     
 ll q;
-cin>>q;
+//cin>>q;
+q=1;
 while(q--)
 {
     solve();

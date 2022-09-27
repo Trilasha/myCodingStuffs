@@ -11,9 +11,6 @@ using namespace std;
 #define uset                  unordered_set
 #define ff                    first
 #define ss                    second
-#define pi                    pair<ll,ll> 
-#define maxpq                 priority_queue <ll> pq;
-#define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
 #define maxval                1000000007
 #define PI                    3.141592653589793238
@@ -40,7 +37,44 @@ using namespace std;
     
     
 void solve(){
-   
+    inp(n);
+    inp(r);
+    inp(b);
+    string ans="";
+   ll t=b+1;
+   ll ct=r/t;
+  ll var=r%t;
+    //ll 
+     //cout<<ct<<endl;
+    // else
+    //  ct=floor((double)r/(b+1));
+    // while(ans.size()!=n)
+    // {
+        while(var--)
+        {
+            for(ll i=0;i<ct+1;++i)
+            {
+            ans.pb('R');
+            r--;
+            }
+            ans.pb('B');
+            b--;
+        }
+        // else if(r<ct && r>0)
+        ll g=(b-var);
+        while(g--)
+        {
+        for(ll i=0;i<ct;++i)
+        {
+        ans.pb('R');
+        r--;
+        }
+        ans.pb('B');
+        b--;
+        }
+
+   // }
+    cout<<ans<<endl;
 }
     
 int main(){

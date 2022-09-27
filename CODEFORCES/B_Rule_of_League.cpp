@@ -59,33 +59,23 @@ void solve(){
             return;
         }
     }
-    ll index=1;
     vector<ll> ans;
-    if(x!=0)
+    ll var=max(x,y);
+    ll index=1;
+    ll set=0;
+    while(ans.size()!=n-1)
     {
-        ll temp=x;
-        while(ans.size()!=n-1)
+        for(ll i=0;i<var;++i)
         {
-           while (temp--)
             ans.pb(index);
-            temp=x;
-            index+=x+1;
         }
+        if(set==0)
+        index+=var+1;
+        else
+        index+=var;
+        set=1;
     }
-    else if(y!=0)
-    {
-        ll temp=y;
-        while(ans.size()!=n-1)
-        {
-           while (temp--)
-            ans.pb(index);
-            temp=y;
-            index+=y+1;
-        }
-    }
-    ans.back()= min(ans.back(), n);
     printv(ans);
-
 }
     
 int main(){
