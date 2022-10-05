@@ -17,7 +17,8 @@
 			"vector": "cpp",
 			"xstring": "cpp",
 			"xutility": "cpp",
-			"map": "cpp"
+			"map": "cpp",
+			"cmath": "cpp"
 		}
 	}
 }

@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +47,29 @@ using namespace std;
 
 
 void solve(){
-   
+   inp(n);
+   vector<ll> v(n);
+   inpv(v);
+   ll set=0;
+   fr(i,n)
+   {
+    if(v[i]==1)
+    set=1;
+   }
+    allasort(v);
+   if(set==1)
+   {
+    ll sum=0;
+    frs(i,1,n)
+    sum+=v[i]-1;
+    cout<<sum<<endl;
+    return;
+   }
+   ll a=v[0]*2;
+   ll ct=0;
+   fr(i,n)
+   ct+=(v[i]-1)/(a-1);
+   cout<<ct<<endl;
 }
     
 int main(){

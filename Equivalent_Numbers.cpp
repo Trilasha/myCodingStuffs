@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -37,21 +33,77 @@ using namespace std;
 #define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
-/// ------------------------------------PRINTOUTS------------------------------------------------- ///
+/// ------------------------------------PRINTOUTS---------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 
-
-/// ---------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
     
-/// ---------------------------------------------------------------------------------------------- ///
-    
-
-
-
+vector<ll> printprimefactors(ll n)
+{
+    vector<ll> v;
+    if(n<=1) return v;
+    while(n%2==0)
+    {
+        //cout<<2;
+        v.pb(2);
+        n=n/2;
+    }
+     while(n%3==0)
+    {
+        //cout<<3;
+        // s.insert(3);
+        v.pb(3);
+        n=n/3;
+    }
+    for (ll i = 5; i*i<=n; i=i+6)
+    {
+        while (n%i==0)
+        {
+           // cout<<i;
+        //    s.insert(i);
+        v.pb(i);
+            n=n/i;
+        }
+        while(n%(i+2)==0)
+        {
+           // cout<<i+2;
+        //    s.insert(i+2);
+        v.pb(i+2);
+            n=n/(i+2);
+        }
+    }
+    if(n>3)
+   // cout<<n;
+//    s.insert(n);
+v.pb(n);
+    return v;
+    //i/p-->450
+    //o/p-->23355
+}
 void solve(){
-   
+   inp(a);
+   inp(b);
+   vector<ll> sa=printprimefactors(a);
+   vector<ll> sb=printprimefactors(b);
+   set<ll> s1;
+   set<ll> s2;
+   fr(i,sa.size())
+   {
+    s1.insert(sa[i]);
+   }
+    fr(i,sb.size())
+   {
+    s2.insert(sb[i]);
+   }
+   if(s1.size()==1 and s2.size()==1 && sa[0]==sb[0])
+   cout<<"YES"<<endl;
+   else
+   cout<<"NO"<<endl;
+//    if(sa.size()==1 && sb.size()==1)
+//    {
+//     for(auto &i:sa)
+//     ll t=i;
+//    }
 }
     
 int main(){
@@ -74,16 +126,10 @@ while(q--)
 
 
 
-
-
 /*
 //
 string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
+
 //
 using namespace std;
 const ll N=1e9+10;

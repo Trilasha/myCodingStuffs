@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -46,12 +42,51 @@ using namespace std;
 //ceil(log2(x))
     
 /// ---------------------------------------------------------------------------------------------- ///
-    
+const ll N=1e5+10;
+const ll INF=1e9+10;
+vector<vector<pair<ll,ll>>> g(N);
+vector<ll> level(N,INF);
 
+ll bfs(ll v){
+    deque<ll> dq;
+    dq.push_back(1);
+    level[1]=0;
+    while(!dq.empty())
+    {
+        ll curr=dq.front();
+        dq.pop_front();
+        for(auto &child:g[curr])
+        {
+            ll child_node=child.first;
+            ll wt=child.second;
+            //cout<<curr<<"->"<<level[curr]<<endl;
+            //cout<<child_node<<"->"<<level[child_node]<<endl;
+            if(level[curr]+wt<level[child_node])
+            {
+                level[child_node]=level[curr]+wt;
+                if(wt==0)
+                dq.push_front(child_node);
+                else
+                dq.push_back(child_node);
+            }
+            //cout<<child_node<<"->"<<level[child_node]<<endl;
+            //cout<<endl;
+        }
+    }
+    return level[v]==INF?-1:level[v];
 
-
+}
 void solve(){
-   
+   inp(v);
+   inp(e);
+   fr(i,e)
+   {
+    ll x,y;
+    cin>>x>>y;
+    g[x].pb({y,0});
+    g[y].pb({x,1});
+   }
+   cout<<bfs(v)<<endl;
 }
     
 int main(){
@@ -61,7 +96,8 @@ cin.tie(NULL);
 
     
 ll q;
-cin>>q;
+//cin>>q;
+q=1;
 while(q--)
 {
     solve();
@@ -74,16 +110,10 @@ while(q--)
 
 
 
-
-
 /*
 //
 string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
+
 //
 using namespace std;
 const ll N=1e9+10;

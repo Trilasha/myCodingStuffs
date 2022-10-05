@@ -49,9 +49,29 @@ using namespace std;
     
 
 
-
+bool check(char &s)
+{
+    if(s=='a' || s=='e' || s=='i'|| s=='o' || s=='u' || s=='A' || s=='E' || s=='I' || s=='O' || s=='U')
+    return true;
+    else
+    return false;
+}
 void solve(){
-   
+    string s;
+    cin>>s;
+    ll set=0;
+    for(ll i=0;i<s.size()-2;++i)
+    {
+        if(check(s[i]) && check(s[i+1]) && check(s[i+2]))
+        {
+            set=1;
+            break;
+        }
+    }
+    if(set==1)
+    cout<<"Happy"<<endl;
+    else
+    cout<<"Sad"<<endl;
 }
     
 int main(){

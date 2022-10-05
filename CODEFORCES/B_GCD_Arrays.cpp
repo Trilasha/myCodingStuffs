@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +47,41 @@ using namespace std;
 
 
 void solve(){
-   
+    inp(l);
+   inp(r);
+   inp(k);
+   if(l==1 && r==1)
+   {
+    cout<<"NO"<<endl;
+    return;
+   }
+   if(l==r)
+   {
+    cout<<"YES"<<endl;
+    return;
+   }
+   ll odd=0;
+   ll even=0;
+   if(l%2==0 && r%2==0)
+   {
+    odd=(r-l)/2;
+   }
+   else if(l%2==0 && r%2!=0)
+   {
+    odd=(r-l)/2+1;
+   }
+   else if(l%2!=0 && r%2==0)
+   {
+    odd=(r-l)/2+1;
+   }
+   else if(l%2!=0 && r%2!=0)
+   {
+    odd=(r-l)/2+1;
+   }
+   if(odd<=k)
+   cout<<"YES"<<endl;
+   else
+   cout<<"NO"<<endl;
 }
     
 int main(){
@@ -82,7 +112,7 @@ string s=to_string(bitset<64> b(10));
 //
 stack,queue->no index access
 use deque,vectors
--->assign(n,val)available for both
+-->assign(n,val)a vailable for both
 -->take size +1(extra) for vectors
 //
 using namespace std;

@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +47,22 @@ using namespace std;
 
 
 void solve(){
-   
+   string s;
+   cin>>s;
+   map<char,ll> mp;
+   fr(i,s.size())
+   {
+    mp[s[i]]++;
+   }
+   ll ans=0;
+   for(auto &i:mp)
+   {
+    if(i.second>2)
+    ans+=2;
+    else
+    ans+=i.second;
+   }
+   cout<<ans/2<<endl;
 }
     
 int main(){

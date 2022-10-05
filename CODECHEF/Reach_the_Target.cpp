@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -37,21 +33,16 @@ using namespace std;
 #define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
-/// ------------------------------------PRINTOUTS------------------------------------------------- ///
+/// ------------------------------------PRINTOUTS---------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 
-
-/// ---------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
     
-/// ---------------------------------------------------------------------------------------------- ///
     
-
-
-
 void solve(){
-   
+   inp(x);
+   inp(y);
+   cout<<x-y<<endl;
 }
     
 int main(){
@@ -74,16 +65,10 @@ while(q--)
 
 
 
-
-
 /*
 //
 string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
+
 //
 using namespace std;
 const ll N=1e9+10;

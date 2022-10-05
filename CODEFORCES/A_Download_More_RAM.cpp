@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -48,10 +44,33 @@ using namespace std;
 /// ---------------------------------------------------------------------------------------------- ///
     
 
-
+bool cmp(pair<ll,ll> &a,pair<ll,ll> &b)
+{
+    if(a.first==b.first)
+    return a.second>b.second;
+    else
+    return a.first<b.first;
+}
 
 void solve(){
-   
+   inp(n);
+   inp(k);
+   vector<ll> a(n),b(n);
+   inpv(a);
+   inpv(b);
+   vector<pll> vp;
+   fr(i,n)
+   {
+    vp.pb({a[i],b[i]});
+   }
+   sort(vp.begin(),vp.end(),cmp);
+   ll ans=k;
+   for(auto &i:vp)
+   {
+    if(i.first<=ans)
+    ans+=i.second;
+   }
+   cout<<ans<<endl;
 }
     
 int main(){
@@ -82,7 +101,7 @@ string s=to_string(bitset<64> b(10));
 //
 stack,queue->no index access
 use deque,vectors
--->assign(n,val)available for both
+-->assign(n,val)a vailable for both
 -->take size +1(extra) for vectors
 //
 using namespace std;

@@ -51,7 +51,59 @@ using namespace std;
 
 
 void solve(){
-   
+   inp(n);
+   vector<ll> v(n);
+   inpv(v);
+   //printv(v);
+   map<ll,ll> mp;
+   fr(i,n)
+   mp[v[i]]++;
+   // printv(v);
+   for(auto &i:mp)
+   {
+    if(i.second>1)
+    {
+    cout<<-1<<endl;
+    return;
+    }
+   }
+   // printv(v);
+   vector<ll> v1;
+   vector<ll> v2;
+   ll index=-1;
+  
+   v1.pb(v[0]);
+   //cout<<v1[0]<<endl;
+   for(ll i=0;i<v.size();++i)
+   {
+    if(v[i]<v[0])
+    v1.pb(v[i]);
+    else if(v[i]>v[0])
+    {
+        v2.pb(v[i]);
+        index=i;
+        break;
+    }
+   }
+//    printv(a);
+//    printv(b);
+   if(index!=-1)
+   {
+    frs(i,index+1,n)
+    v2.pb(v[i]);
+   }
+   if(v2.size()==0)
+   {
+    cout<<-1<<endl;
+   }
+   else
+   {
+   // cout<<"aaa"<<endl;
+    cout<<v1.size()<<endl;
+    printv(v1);
+    cout<<v2.size()<<endl;
+    printv(v2);
+   }
 }
     
 int main(){

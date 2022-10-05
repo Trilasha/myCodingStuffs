@@ -2,16 +2,13 @@
 using namespace std;
 int main()
 {
-    uint32_t n;
-    int count = 0;
-    cin >> n;
-    while(n != 0)
-    {
-        if(n & 1)
-        {
-            count += 1;
-        }
-        n = n >> 1;
-    }
-    cout << count << endl;
+    // bitset<64> b(10);
+    // string s=b.to_string();
+    // string s=to_string(bitset<64> b(10));
+    // cout<<s<<endl;
+
+    //
+    string ans="0010101";
+    bitset<64> b(ans);
+    cout<<b.count<<endl;
 }

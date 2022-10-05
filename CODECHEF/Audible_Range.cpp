@@ -51,7 +51,11 @@ using namespace std;
 
 
 void solve(){
-   
+   inp(n);
+   if(n>=67 && n<=45000)
+   cout<<"YES"<<endl;
+   else
+   cout<<"NO"<<endl;
 }
     
 int main(){

@@ -11,6 +11,9 @@ using namespace std;
 #define uset                  unordered_set
 #define ff                    first
 #define ss                    second
+#define pi                    pair<ll,ll> 
+#define maxpq                 priority_queue <ll> pq;
+#define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
 #define maxval                1000000007
 #define PI                    3.141592653589793238
@@ -30,51 +33,34 @@ using namespace std;
 #define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
-/// ------------------------------------PRINTOUTS---------------------------------------- ///
+/// ------------------------------------PRINTOUTS------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 
-    
-    
-void solve(){
-    inp(n);
-    inp(r);
-    inp(b);
-    string ans="";
-   ll t=b+1;
-   ll ct=r/t;
-  ll var=r%t;
-    //ll 
-     //cout<<ct<<endl;
-    // else
-    //  ct=floor((double)r/(b+1));
-    // while(ans.size()!=n)
-    // {
-        while(var--)
-        {
-            for(ll i=0;i<ct+1;++i)
-            {
-            ans.pb('R');
-            r--;
-            }
-            ans.pb('B');
-            b--;
-        }
-        // else if(r<ct && r>0)
-        ll g=(b-var);
-        while(g--)
-        {
-        for(ll i=0;i<ct;++i)
-        {
-        ans.pb('R');
-        r--;
-        }
-        ans.pb('B');
-        b--;
-        }
 
-   // }
-    cout<<ans<<endl;
+/// ---------------------------------------------------------------------------------------------- ///
+//ceil(log2(x))
+    
+/// ---------------------------------------------------------------------------------------------- ///
+    
+
+
+
+void solve(){
+   inp(n);
+   vector<ll> v(n);
+   inpv(v);
+   ll even=0;
+   ll odd=0;
+   f(i,n)
+   {
+    if[v[i]%2==0]
+    even++;
+    else
+    odd++;
+   }
+   if(even>=odd)
+
 }
     
 int main(){
@@ -91,3 +77,28 @@ while(q--)
 }
     return 0;
 }
+
+
+
+
+
+
+/*
+//
+string s=to_string(bitset<64> b(10));
+
+//
+using namespace std;
+const ll N=1e9+10;
+vector<ll> g[N];
+bool vis[N];
+void dfs(ll vertex)
+{
+vis[vertex]=true;
+for(ll child:g[vertex])
+{
+    if(vis[child])continue;
+    dfs(child);
+}
+}
+*/

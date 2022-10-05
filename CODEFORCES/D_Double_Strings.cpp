@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -49,9 +45,43 @@ using namespace std;
     
 
 
-
+// bool cmp(pair<string,ll> &a,pair<string,ll> &b)
+// {
+//     return a.first.size()<b.first.size();
+// }
 void solve(){
-   
+   inp(n);
+   vector<string> v(n);
+   fr(i,n)
+   cin>>v[i];
+   vector<pair<string,ll>> vp;
+   fr(i,n)
+   vp.pb({v[i],0});
+   set<string> s;
+   fr(i,n)
+   s.insert(vp[i].first);
+   //sort(vp.begin(),vp.end(),cmp);
+    // for(auto &i:vp)
+    // cout<<i.first<<" "<<i.second<<endl;
+   for(auto &i:vp)
+   {
+    for(ll j=1;j<=i.first.size();++j)
+    {
+        if(s.find(i.first.substr(0,j))!=s.end())
+        {
+            if(s.find(i.first.substr(j,i.first.size()-j))!=s.end())
+            {
+                i.second=1;
+                break;
+            }
+        }
+    }
+   }
+   string ans="";
+   for(auto &i:vp)
+   ans.pb(i.second+'0');
+   cout<<ans<<endl;
+
 }
     
 int main(){

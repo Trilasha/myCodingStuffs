@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -49,9 +45,78 @@ using namespace std;
     
 
 
-
+bool check(vector<ll> &v)
+{
+    frs(i,1,v.size())
+    {
+        if(v[i]<v[i-1])
+        return false;
+    }
+    return true;
+}
 void solve(){
-   
+   inp(n);
+   vector<ll> v(n);
+   inpv(v);
+   vector<pll> vp;
+   if(check(v))
+   {
+    cout<<0<<endl;
+    return;
+   }
+   ll ct=0;
+   ll sum=v[0]+v[n-1];
+   if(sum%2==0)
+   v[0]=v[n-1];
+   else
+   v[n-1]=v[0];
+   vp.pb({1,n});
+   frs(i,1,n-1)
+   {
+//     if((v[i]+v[i-1])%2!=0)
+//     {
+//         if(v[i]<=v[i-1])
+//         {
+//         v[i]=v[i-1];
+//         vp.pb({i,i+1});
+//         }
+//         else
+//         {
+//         v[n-1]=v[i];
+//         vp.pb({i+1,n});
+//         }
+//    }
+//    else if((v[i]+v[i-1])%2==0)
+//     {
+//         if(v[i]<=v[i-1])
+//         {
+//         v[i]=v[n-1];
+//         vp.pb({i+1,n});
+//         }
+//         else
+//         {
+//         v[i-1]=v[i];
+//         vp.pb({i,i+1});
+//         }
+if((v[i]+v[0])%2==0)
+vp.pb({i+1,n});
+else
+vp.pb({1,i+1});
+   //}
+   ct++;
+}
+//    if(v[n-1]<v[n-2])
+//    {
+//     ct++;
+//     v[n-1]=v[n-2];
+//     vp.pb({n-1,n});
+//    }
+  // printv(v);
+   cout<<ct+1<<endl;
+   for(auto &i:vp)
+   {
+    cout<<i.first<<" "<<i.second<<endl;
+   }
 }
     
 int main(){
@@ -74,16 +139,10 @@ while(q--)
 
 
 
-
-
 /*
 //
 string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
+
 //
 using namespace std;
 const ll N=1e9+10;

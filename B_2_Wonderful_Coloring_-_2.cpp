@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +47,40 @@ using namespace std;
 
 
 void solve(){
-   
+   inp(n);
+   inp(k);
+   vector<ll> v(n);
+   inpv(v);
+   map<ll,ll> mp;
+   fr(i,n)
+   mp[v[i]]++;
+   ll ans=0;
+   for(auto &i:mp)
+   {
+    if(i.second>k)
+    ans+=k;
+    else
+    ans+=i.second;
+   }
+   ll var=ans/k;
+//    for(auto &i:mp)
+//    cout<<i.first<<" "<<i.second<<endl;
+  // cout<<endl;
+   fr(i,n)
+   {
+    ll c=v[i];
+    if(mp[v[i]]>k)
+    {
+        mp[v[i]]=k;
+    }
+    v[i]=mp[v[i]];
+    if(mp[c]!=0)
+    mp[c]--;
+   // cout<<v[i]<<" "<<mp[v[i]]<<endl;
+   // v[i]=c;
+    //cout<<mp[v[i]]<<endl;
+   }
+   printv(v);
 }
     
 int main(){

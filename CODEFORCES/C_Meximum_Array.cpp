@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +47,48 @@ using namespace std;
 
 
 void solve(){
-   
+    inp(n);
+   vector<ll> v(n);
+   inpv(v);
+   vector<ll> suff(n+5),ct(n+5);
+   ll val=0;
+   for(ll i=n-1;i>=0;--i)
+   {
+    ct[v[i]]++;
+    while(ct[val])
+    val++;
+    suff[i]=val;
+   }
+   //
+   vector<ll> ans,ct2(n+5);
+   ll curr_mex=0;
+   ll ind=0;
+   ll req;
+   while(ind<n)
+   {
+    req=suff[ind];
+    if(req==curr_mex)
+    ind++;
+    else
+    {
+        while(req!=curr_mex)
+        {
+            if(curr_mex<=v[ind])
+            ct2[v[ind]]=1;
+
+            while(ct2[curr_mex])
+            {
+                ct2[curr_mex]=0;
+                curr_mex++;
+            }
+            ind++;
+        }
+   }
+   curr_mex=0;
+   ans.pb(req);
+   }
+   cout<<ans.size()<<endl;
+   printv(ans);
 }
     
 int main(){
@@ -77,14 +114,14 @@ while(q--)
 
 
 /*
-//
+/////////////////////////
 string s=to_string(bitset<64> b(10));
-//
+////////////////////////
 stack,queue->no index access
 use deque,vectors
 -->assign(n,val)available for both
--->take size +1(extra) for vectors
-//
+-->take size--> +1 atleast as extra-->for vectors
+////////////////////////
 using namespace std;
 const ll N=1e9+10;
 vector<ll> g[N];

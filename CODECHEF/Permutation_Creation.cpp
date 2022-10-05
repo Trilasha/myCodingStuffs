@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -37,21 +33,53 @@ using namespace std;
 #define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
-/// ------------------------------------PRINTOUTS------------------------------------------------- ///
+/// ------------------------------------PRINTOUTS---------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 
-
-/// ---------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
     
-/// ---------------------------------------------------------------------------------------------- ///
     
-
-
-
 void solve(){
-   
+   inp(n);
+   if(n==2 || n==3)
+   cout<<-1<<endl;
+   else if(n==4)
+   cout<<3<<" "<<1<<" "<<4<<" "<<2<<endl;
+   else
+   {
+    if(n%2==0)
+    {
+        vector<ll> ans;
+        ll s=1;
+        ll o=n/2+1;
+        while(ans.size()!=n)
+        {
+            ans.pb(s);
+            s++;
+               if(ans.size()==n)
+            break;
+            ans.pb(o);
+            o++;
+        }
+        printv(ans);
+    }
+    else
+    {
+        vector<ll> ans;
+        ll s=1;
+        ll o=(n/2)+2;
+        while(ans.size()!=n)
+        {
+            ans.pb(s);
+            s++;
+            if(ans.size()==n)
+            break;
+            ans.pb(o);
+            o++;
+        }
+        printv(ans);
+    }
+   }
 }
     
 int main(){
@@ -72,30 +100,7 @@ while(q--)
 
 
 
-
-
-
-
 /*
 //
 string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
-//
-using namespace std;
-const ll N=1e9+10;
-vector<ll> g[N];
-bool vis[N];
-void dfs(ll vertex)
-{
-vis[vertex]=true;
-for(ll child:g[vertex])
-{
-    if(vis[child])continue;
-    dfs(child);
-}
-}
 */

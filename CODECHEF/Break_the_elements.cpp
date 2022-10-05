@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -27,7 +23,7 @@ using namespace std;
 #define inpv(v)               for(auto &x: v) cin>>x;
 #define make(arr,n)           ll arr[n]; fr(i,n) cin>>arr[i];
 /// ------------------------------------FOR LOOPS AND SORT---------------------------------------- ///
-#define fr(i,n)               for (ll i=0;i<n;++i)
+#define fr(i,n)               for(ll i=0;i<n;++i)
 #define frs(i,k,n)            for(ll i=k;i<n;++i)
 #define fA(i,a,n)             for(ll i=a;i<=(n);++i)
 #define fD(i,a,n)             for(ll i=a;i>=(n);--i)
@@ -37,21 +33,60 @@ using namespace std;
 #define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
-/// ------------------------------------PRINTOUTS------------------------------------------------- ///
+/// ------------------------------------PRINTOUTS---------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 
-
-/// ---------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
     
-/// ---------------------------------------------------------------------------------------------- ///
     
-
-
-
 void solve(){
-   
+   inp(n);
+   vector<ll> v(n);
+   fr(i,n)
+   cin>>v[i];
+   ll set=0;
+   ll even=0;
+   ll odd=0;
+   fr(i,n)
+   {
+    if(v[i]%2==0)
+    even++;
+    else
+    odd++;
+   }
+   if(even==0 || odd==0)
+   {
+    cout<<0<<endl;
+    return;
+   }
+//    fr(i,n)
+//    {
+//     if(v[i]==1)
+//     {
+//         set=1;
+//         break;
+//     }
+//    }
+//    ll ct=0;
+//    if(set==1)
+//    {
+//     fr(i,n)
+//     {
+//         if(v[i]%2==0)
+//         ct+=1;
+//     }
+//     cout<<ct<<endl;
+//    }
+//    else
+//    {
+    ll ct1=0;
+    fr(i,n)
+    {
+        if(v[i]%2==0)
+        ct1+=1;
+    }
+    cout<<ct1<<endl;
+   //}
 }
     
 int main(){
@@ -69,6 +104,11 @@ while(q--)
     return 0;
 }
 
+ 
+
+
+
+
 
 
 
@@ -79,11 +119,7 @@ while(q--)
 /*
 //
 string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
+
 //
 using namespace std;
 const ll N=1e9+10;

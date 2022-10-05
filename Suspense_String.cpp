@@ -51,7 +51,37 @@ using namespace std;
 
 
 void solve(){
-   
+   inp(n);
+   string s;
+   cin>>s;
+  deque<char> dq;
+  ll a=0;
+  ll b=s.size()-1;
+  while(dq.size()!=n)
+  {
+    if(s[a++]=='0')
+    {
+        dq.push_front('0');
+    }
+    else
+    {
+        dq.push_back('1');
+    }
+    if(dq.size()==n)
+    break;
+     if(s[b--]=='0')
+    {
+        dq.push_back('0');
+    }
+    else
+    {
+        dq.push_front('1');
+    }
+
+  }
+  for(auto &i:dq)
+  cout<<i;
+  cout<<endl;
 }
     
 int main(){

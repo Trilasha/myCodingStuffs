@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +47,101 @@ using namespace std;
 
 
 void solve(){
+   inp(n);
+   vector<ll> type(n),val(n);
+   inpv(type);
+   inpv(val);
+   vector<ll> fire;
+   vector<ll> frost;
+   fr(i,n)
+   {
+    if(type[i]==0)
+    fire.pb(val[i]);
+    else
+    frost.pb(val[i]);
+   }
+   // printv(fire);
+   //printv(frost);
+
+   if(fire.size()==0 || frost.size()==0)
+   {
+    ll sum=0;
+    fr(i,n)
+    sum+=val[i];
+    cout<<sum<<endl;
+    return;
+   }
+   sort(fire.begin(),fire.end(),greater<ll>());
+   sort(frost.begin(),frost.end(),greater<ll>());
+//printv(fire);
+//printv(frost);
+
+   //
+   ll inda=0;
+   ll indb=0;
+   vector<ll> temp;
+   temp.pb(fire[fire.size()-1]);
+   ll set=0;
+   while(temp.size()!=n)
+   {
+    if(indb!=frost.size())
+    {
+    if(set==0)
+    temp.pb(2*frost[indb++]);
+    else
+    temp.pb(frost[indb++]);
+    set=1;
+    }
+    if(temp.size()==n)
+    break;
+    if(inda<(fire.size()-1))
+    {
+    if(set==1)
+    temp.pb(2*fire[inda++]);
+    else
+    temp.pb(fire[inda++]);
+    set=0;
+    }
+   }
+  // printv(temp);
+   ll sum1=accumulate(temp.begin(),temp.end(),0);
+   //cout<<sum1<<endl;
+
+
+   //
+   inda=0;
+   indb=0;
+   vector<ll> temp2;
+   temp2.pb(frost[frost.size()-1]);
+   ll sety=1;
+   while(temp2.size()!=n)
+   {
+    if(inda!=fire.size())
+    {
+    if(sety==1)
+    temp2.pb(2*fire[inda++]);
+    else
+    temp2.pb(fire[inda++]);
+    sety=0;
+    }
+    if(temp2.size()==n)
+    break;
+    if(indb<(frost.size()-1))
+    {
+    if(sety==0)
+    temp2.pb(2*frost[indb++]);
+    else
+    temp2.pb(frost[indb++]);
+    sety=1;
+    }
+   }
+
    
+  //printv(temp2);
+   ll sum2=accumulate(temp2.begin(),temp2.end(),0);
+  // cout<<sum2<<endl;
+   cout<<max(sum1,sum2)<<endl;
+
 }
     
 int main(){
@@ -74,16 +164,10 @@ while(q--)
 
 
 
-
-
 /*
 //
 string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
+
 //
 using namespace std;
 const ll N=1e9+10;

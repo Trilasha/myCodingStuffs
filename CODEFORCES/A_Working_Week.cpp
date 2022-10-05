@@ -1,7 +1,3 @@
-/*
-Trilasha Mazumder
-2112063
-*/
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 using namespace std;
@@ -51,7 +47,8 @@ using namespace std;
 
 
 void solve(){
-   
+   inp(n);
+   cout<<n/3-2<<endl;
 }
     
 int main(){
