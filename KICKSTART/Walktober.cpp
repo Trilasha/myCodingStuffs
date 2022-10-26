@@ -51,39 +51,64 @@ typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_stat
 
 /// ------------------------------------NUMBER THEORY--------------------------------------------- ///
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
-/*
-vector<ll> v= sieve(1e5+10);
-TC--> nloglogn
-*/
+//vector<ll> v= sieve(1e5+10);
+////TC--> nloglogn
 
 /// ------------------------------------PRINTOUTS------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 void google(ll t) {cout << "Case #" << t << ": ";}
 
+/// ---------------------------------------------------------------------------------------------- ///
+//ceil(log2(x))
+//is_sorted(all(v))
+//is_sorted(s.begin(), s.end())
 
-void avoid_error()
-{
-/*
-when the ans vector contains modulated values,then take the modulo(%) while calculating the elements' value...DON'T JUST PUT % AT THE TIME OF INSERTION 
-CORRECT                     :-loop-->anss=(anss*powers[j])%(nn); then ans.pb(anss);
-WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn);
-AVOID creating any prefix product array in case of modulo problems
+//string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//string low="abcdefghijklmnopqrstuvwxyz";
+//string num="0123456789";
 
--->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
-*/
-}
-
-
+//double sum=0;
+//cout << fixed << setprecision(6) << sum << endl;
+/// ---------------------------------------------------------------------------------------------- ///
     
 
 
-void solve()
+void tilu()
 {
-
+    inp(m);
+    inp(n);
+    inp(p);
+    vector<ll> ans;
+    vector<ll> maxyv;
+    ll temp=-1;
+    vector<vector<ll>> v(m,vector<ll>(n,0));
+    for(ll i=0;i<m;++i)
+    {
+        for(ll j=0;j<n;++j)
+        cin>>v[i][j];
+    }
+    for(ll i=0;i<n;++i)
+    {
+        for(ll j=0;j<m;++j)
+        {
+            if(j!=(p-1))
+            {
+                temp=max(temp,v[j][i]);
+            }
+        }
+        maxyv.pb(temp);
+        temp=-1;
+    }
+    fr(i,n)
+    {
+        if(v[p-1][i]>=maxyv[i])
+        ans.pb(0);
+        else
+        ans.pb(maxyv[i]-v[p-1][i]);
+    }
+    ll sum=accumulate(all(ans),0);
+    cout<<sum<<endl;
 }
     
 int main(){
@@ -95,8 +120,8 @@ cin.tie(NULL);
 ll q=1;
 cin>>q;
 for(ll i=0;i<q;i++){
-   // google(i+1);
-    solve();
+   google(i+1);
+    tilu();
 }
     return 0;
 }
@@ -116,33 +141,14 @@ for(ll i=0;i<q;i++){
 
 
 /*
-
-/// ----------------------------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
-//is_sorted(all(v))
-//is_sorted(s.begin(), s.end())
-//number of subarrays in an array of size 'n' = (n*(n+1))/2;
-
-
-//string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//string low="abcdefghijklmnopqrstuvwxyz";
-//string num="0123456789";
-
-//double sum=0;
-//cout << fixed << setprecision(6) << sum << endl;
-/// ----------------------------------------------------------------------------------------------------------------- ///
-
-
-////////
-bitset<64> b(n);
-string s=b.to_string();
-//n<=1e18 can be expressesed in 64 bit string
+//////
+string s=to_string(bitset<64> b(10));
 
 ////////
 stack,queue->no index access
 use deque,vectors
 -->assign(n,val)available for both
-
+-->take size +1(extra) for vectors
 
 
 ////////// working with iterators  //////////
@@ -172,16 +178,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

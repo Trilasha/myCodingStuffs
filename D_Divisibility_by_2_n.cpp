@@ -71,18 +71,91 @@ WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn)
 AVOID creating any prefix product array in case of modulo problems
 
 -->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
 */
 }
 
 
     
 
-
+ll countof2(ll n)
+{
+    ll ct=0;
+   while(n%2==0) {
+    n/=2;
+    ct++;
+    }
+    return ct;
+}
+// bool cmp(ll &a,ll &b)
+// {
+//    if(countof2(a)>countof2(b))
+//    return a>b;
+//    else if(countof(a)==countof(b))
+//    return a>b;
+//    else
+//    return b>a;
+// }
 void solve()
 {
+    inp(n);
+    vector<ll> v(n);
+    inpv(v);
+    ll pro=1;
+    fr(i,n)
+    pro*=v[i];
+
+    ll curr_two=countof2(pro);
+   // cout<<pro<<" "<<curr_two;
+    // if(curr_two>=n || pro%(ll)(pow(2,n))==0)
+    // {
+    //     cout<<0<<endl;
+    //     return;
+    // }
+    vector<pll> p2;
+    for(ll i=1;i<=n;++i)
+    {
+            p2.pb({countof2(i),i});
+    }
+    sort(p2.rbegin(),p2.rend());
+    //  for(auto &i:p2)
+    //     cout<<i.first<<" "<<i.second<<endl;
+    //   sort(all(rem),greater<ll>());
+    ll ans=0;
+    ll chk=0;
+    for(ll i=0;i<p2.size();++i)
+    {
+    //     if((p2[i].ss)%2==0)
+    //     ans++;
+    //   //  pro*=(ll)pow(2,countof2(p2[i]));
+    //     pro*=p2[i].ss;
+    //     ll var=countof2(pro);
+    //     if(var>=n)
+    //     {
+    //     chk=1;
+    //     break;
+    //     }
+    ll var=p2[i].ss;
+    if(curr_two<n)
+    {
+        while(var%2==0)
+        {
+            var/=2;
+            curr_two++;
+        }
+        ans+=(p2[i].ss%2==0);
+    }
+    if(curr_two>=n)
+    {
+        chk=1;
+        break;
+    }
+    }
+    if(chk==0)
+   cout<<-1<<endl;
+   else
+    cout<<ans<<endl;
+
+ 
 
 }
     
@@ -121,8 +194,6 @@ for(ll i=0;i<q;i++){
 //ceil(log2(x))
 //is_sorted(all(v))
 //is_sorted(s.begin(), s.end())
-//number of subarrays in an array of size 'n' = (n*(n+1))/2;
-
 
 //string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //string low="abcdefghijklmnopqrstuvwxyz";
@@ -130,6 +201,7 @@ for(ll i=0;i<q;i++){
 
 //double sum=0;
 //cout << fixed << setprecision(6) << sum << endl;
+
 /// ----------------------------------------------------------------------------------------------------------------- ///
 
 
@@ -172,16 +244,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

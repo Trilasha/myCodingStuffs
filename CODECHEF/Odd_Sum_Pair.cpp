@@ -71,9 +71,6 @@ WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn)
 AVOID creating any prefix product array in case of modulo problems
 
 -->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
 */
 }
 
@@ -83,6 +80,26 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+    vector<ll> v(3);
+    fr(i,3)
+    cin>>v[i];
+    ll chk=0;
+    ll chk2=0;
+    fr(i,3)
+    {
+        if(v[i]%2==0)
+        {
+            chk=1;
+        }
+        if(v[i]%2!=0)
+        {
+            chk2=1;
+        }
+    }
+    if(chk==1 && chk2==1)
+    cout<<"YES"<<endl;
+    else
+    cout<<"NO"<<endl;
 
 }
     
@@ -121,8 +138,6 @@ for(ll i=0;i<q;i++){
 //ceil(log2(x))
 //is_sorted(all(v))
 //is_sorted(s.begin(), s.end())
-//number of subarrays in an array of size 'n' = (n*(n+1))/2;
-
 
 //string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //string low="abcdefghijklmnopqrstuvwxyz";
@@ -130,6 +145,7 @@ for(ll i=0;i<q;i++){
 
 //double sum=0;
 //cout << fixed << setprecision(6) << sum << endl;
+
 /// ----------------------------------------------------------------------------------------------------------------- ///
 
 
@@ -172,16 +188,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

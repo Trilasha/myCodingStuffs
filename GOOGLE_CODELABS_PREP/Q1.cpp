@@ -3,7 +3,6 @@ Trilasha Mazumder
 2112063
 */
 
-
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 
@@ -45,46 +44,64 @@ typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_stat
 #define fD(i,a,n)             for(ll i=a;i>=(n);--i)
 #define dsort(arr)            sort(arr,arr+n,greater<ll>())
 #define asort(arr)            sort(arr,arr+n)
+#define allasort(str)         sort(str.begin(), str.end())
+#define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
 
 
 /// ------------------------------------NUMBER THEORY--------------------------------------------- ///
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
-/*
-vector<ll> v= sieve(1e5+10);
-TC--> nloglogn
-*/
+//vector<ll> v= sieve(1e5+10);
+////TC--> nloglogn
 
 /// ------------------------------------PRINTOUTS------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
-void google(ll t) {cout << "Case #" << t << ": ";}
 
-
-void avoid_error()
-{
-/*
-when the ans vector contains modulated values,then take the modulo(%) while calculating the elements' value...DON'T JUST PUT % AT THE TIME OF INSERTION 
-CORRECT                     :-loop-->anss=(anss*powers[j])%(nn); then ans.pb(anss);
-WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn);
-AVOID creating any prefix product array in case of modulo problems
-
--->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
-*/
-}
-
-
+/// ---------------------------------------------------------------------------------------------- ///
+//ceil(log2(x))
+//is_sorted(all(v))
+//is_sorted(s.begin(), s.end())
+//string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+//string low="abcdefghijklmnopqrstuvwxyz";
+//string num="0123456789";
+/// ---------------------------------------------------------------------------------------------- ///
     
 
 
-void solve()
-{
 
+void solve(){
+   inp(n);
+   vector<ll> v(n);
+   inpv(v);
+
+   map<ll,ll> mp;
+   set<ll> s;
+
+   fr(i,n)
+   {
+   mp[v[i]]++;
+   s.insert(v[i]);
+   }
+
+   inp(q);
+   while(q--)
+   {
+    ll x;
+    cin>>x;
+    ll ans=0;
+    for(auto &i:s)
+    {
+        if(x>=i)
+        ans+=mp[i];
+    }
+    cout<<ans<<endl;
+   }
 }
+
+//tc-->q*n
+
     
 int main(){
 
@@ -92,10 +109,11 @@ ios_base::sync_with_stdio(false);
 cin.tie(NULL);
 
     
-ll q=1;
-cin>>q;
-for(ll i=0;i<q;i++){
-   // google(i+1);
+ll q;
+//cin>>q;
+q=1;
+while(q--)
+{
     solve();
 }
     return 0;
@@ -116,33 +134,14 @@ for(ll i=0;i<q;i++){
 
 
 /*
-
-/// ----------------------------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
-//is_sorted(all(v))
-//is_sorted(s.begin(), s.end())
-//number of subarrays in an array of size 'n' = (n*(n+1))/2;
-
-
-//string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//string low="abcdefghijklmnopqrstuvwxyz";
-//string num="0123456789";
-
-//double sum=0;
-//cout << fixed << setprecision(6) << sum << endl;
-/// ----------------------------------------------------------------------------------------------------------------- ///
-
-
-////////
-bitset<64> b(n);
-string s=b.to_string();
-//n<=1e18 can be expressesed in 64 bit string
+//////
+string s=to_string(bitset<64> b(10));
 
 ////////
 stack,queue->no index access
 use deque,vectors
 -->assign(n,val)available for both
-
+-->take size +1(extra) for vectors
 
 
 ////////// working with iterators  //////////
@@ -172,16 +171,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

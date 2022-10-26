@@ -83,6 +83,36 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+inp(n);
+ll var=n/2;
+
+    vector<ll> big;
+    vector<ll> small;
+    ll ind=0;
+    ll ind2=0;
+    for(ll i=1;i<=(n/2);++i)
+    small.pb(i);
+    for(ll i=(n/2+1);i<=n;++i)
+    big.pb(i);
+    // printv(small);
+    // printv(big);
+    vector<ll> ans;
+    while(1)
+    {
+        if(ans.size()==n)
+        break;
+
+        if(ind!=(big.size()))
+        ans.pb(big[ind++]);
+
+        if(ans.size()==n)
+        break;
+        if(ind2!=(small.size()))
+        ans.pb(small[ind2++]);
+         if(ans.size()==n)
+        break;
+    }
+    printv(ans);
 
 }
     

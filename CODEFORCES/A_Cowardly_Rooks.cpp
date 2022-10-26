@@ -71,9 +71,6 @@ WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn)
 AVOID creating any prefix product array in case of modulo problems
 
 -->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
 */
 }
 
@@ -83,7 +80,42 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+inp(n);
+inp(m);
+vector<ll> row(n);
+vector<ll> col(n);
+for(ll i=0;i<m;++i)
+{
+    ll x,y;
+    cin>>x>>y;
+    row[x-1]=1;
+    col[y-1]=1;
+}
+ll chk=0;
+ll chk2=0;
+for(ll i=0;i<n;++i)
+{
+    if(row[i]==0)
+    {
+    chk=1;
+    break;
+    }
+}
+for(ll i=0;i<n;++i)
+{
+    if(col[i]==0)
+    {
+    chk2=1;
+    break;
+    }
+}
 
+if(chk==1 && chk2==1)
+{
+    cout<<"YES"<<endl;
+    return;
+}
+cout<<"NO"<<endl;
 }
     
 int main(){
@@ -172,16 +204,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

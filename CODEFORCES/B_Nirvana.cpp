@@ -71,19 +71,71 @@ WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn)
 AVOID creating any prefix product array in case of modulo problems
 
 -->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
 */
 }
 
 
+
+
+// Taken from https://www.geeksforgeeks.org/find-the-number-in-a-range-having-maximum-product-of-the-digits/
+
+// Returns the product of digits of number x 
+int product(int x) 
+{ 
+    int prod = 1; 
+    while (x) { 
+        prod *= (x % 10); 
+        x /= 10; 
+    } 
+    return prod; 
+} 
+  
+// This function returns the number having 
+// maximum product of the digits 
+int findNumber(int l, int r) 
+{ 
+    // Converting both integers to strings 
+    string a = to_string(l); 
+    string b = to_string(r); 
+  
+    // Let the current answer be r 
+    int ans = r; 
+    for (int i = 0; i < b.size(); i++) { 
+        if (b[i] == '0') 
+            continue; 
+  
+        // Stores the current number having 
+        // current digit one less than current 
+        // digit in b 
+        string curr = b; 
+        curr[i] = ((curr[i] - '0') - 1) + '0'; 
+  
+        // Replace all following digits with 9 
+        // to maximise the product 
+        for (int j = i + 1; j < curr.size(); j++) 
+            curr[j] = '9'; 
+  
+        // Convert string to number 
+        int num = 0; 
+        for (auto c : curr) 
+            num = num * 10 + (c - '0'); 
+  
+        // Check if it lies in range and its product 
+        // is greater than max product 
+        if (num >= l && product(ans) < product(num)) 
+            ans = num; 
+    } 
+  
+    return ans; 
+} 
     
 
 
 void solve()
 {
-
+    inp(n);
+    int num=findNumber(1,n);
+    cout<<product(num)<<endl;
 }
     
 int main(){
@@ -93,7 +145,7 @@ cin.tie(NULL);
 
     
 ll q=1;
-cin>>q;
+//cin>>q;
 for(ll i=0;i<q;i++){
    // google(i+1);
     solve();
@@ -172,16 +224,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

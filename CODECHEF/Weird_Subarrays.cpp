@@ -71,9 +71,6 @@ WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn)
 AVOID creating any prefix product array in case of modulo problems
 
 -->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
 */
 }
 
@@ -83,6 +80,81 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+inp(n);
+vector<ll> v(n);
+inpv(v);
+
+
+
+// ll mini=INT_MAX;
+// ll ct=0;
+// ll ans=0;
+// for(ll i=0;i<(n-1);++i)
+// {
+//     if(v[i]<v[i+1])
+//     {
+//         mini=min(mini,v[i]);
+//         ct++;
+//     }
+//     else if(v[i]>v[i+1] && i==0)
+//     {
+//         mini=min(mini,-v[i]);
+//         ct++;
+//     }
+//     else if(v[i]>v[i+1] && (-v[i])>mini)
+//     {
+//         mini=min(mini,-v[i]);
+//         ct++;
+//     }
+//     else if(v[i]>v[i+1] && (-v[i])<mini)
+//     {
+        
+//         mini=min(mini,-v[i]);
+//         ans+=(ct*(ct+1))/2;
+//         ct=1;
+//         //i++;
+//     }
+//    // cout<<ct<<" "<<mini<<" "<<ans<<endl;
+// }
+// if(ct!=0)
+// {
+//     //ct--;
+// ans=ans+n+(ct*(ct+1))/2;
+// }
+//  cout<<ans<<endl;
+
+vector<ll> hills;
+ll ans=0;
+for(ll i=1;i<n-1;++i)
+{
+    if(v[i]>v[i-1] && v[i]>v[i+1])
+    {
+        hills.pb(i);
+    }
+}
+
+if(hills.size()==0)
+{
+    cout<<(n*(n+1))/2<<endl;
+    return;
+}
+
+ll ct=0;
+for(ll i=1;i<hills.size();++i)
+{
+    ct=hills[i]-hills[i-1]+1;
+    ans+=(ct*(ct+1))/2;
+}
+
+ct=hills[0]+1;
+ans+=(ct*(ct+1))/2;
+
+ct=n-hills.back();
+ans+=(ct*(ct+1))/2;
+
+
+ans-=hills.size();
+cout<<ans<<endl;
 
 }
     
@@ -105,7 +177,27 @@ for(ll i=0;i<q;i++){
 
 
 
-
+///////////////////////
+// ll var=0;
+// ll ans=1;
+// ll ct=1;
+// for(ll i=0;i<n-1;++i)
+// {
+//     if(var==1 && v[i]>v[i+1])
+//     {
+//         ct=1;
+//         var=0;
+//     }
+//     if(var==0 && v[i]<v[i+1])
+//     {
+//         var=1;
+//     }
+//     ct+=1;
+//     ans+=ct;
+//     cout<<ans<<endl;
+// }
+// cout<<ans<<endl;
+////////////////////////////
 
 
 
@@ -121,8 +213,6 @@ for(ll i=0;i<q;i++){
 //ceil(log2(x))
 //is_sorted(all(v))
 //is_sorted(s.begin(), s.end())
-//number of subarrays in an array of size 'n' = (n*(n+1))/2;
-
 
 //string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 //string low="abcdefghijklmnopqrstuvwxyz";
@@ -130,6 +220,7 @@ for(ll i=0;i<q;i++){
 
 //double sum=0;
 //cout << fixed << setprecision(6) << sum << endl;
+
 /// ----------------------------------------------------------------------------------------------------------------- ///
 
 
@@ -172,16 +263,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

@@ -83,7 +83,41 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
-
+inp(n);
+string s;
+cin>>s;
+ll shu=0;
+ll shi=0;
+ll chk=0;
+sort(all(s),greater<char>());
+for(ll i=0;i<s.size();++i)
+{
+    if(chk==0)
+    {
+        shu+=s[i]-'0';
+        chk=1;
+    }
+    else if(chk==1)
+    {
+        shi+=s[i]-'0';
+        chk=0;
+    }
+}
+if(shi==shu)
+{
+    cout<<"SHUBHAM"<<endl;
+    return;
+}
+else if(shi>shu)
+{
+    cout<<"SHUBHAM"<<endl;
+    return;
+}
+else if(shi<shu)
+{
+    cout<<"SHIVAM"<<endl;
+    return;
+}
 }
     
 int main(){

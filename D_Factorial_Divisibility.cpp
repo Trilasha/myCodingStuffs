@@ -83,7 +83,25 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+    inp(n);
+    inp(x);
+    vector<ll> v(n);
+    inpv(v);
+    map<ll,ll> m;
 
+  for(auto i:v) 
+  m[i]++;
+
+  ll mini = *min_element(all(v));
+
+  for(ll i=mini;i<x;i++){
+    if(m[i]%(i+1) != 0){
+      cout << "No" << endl;
+      return;
+    }
+    m[i+1]+=(m[i]/(i+1));
+  }
+  cout << "Yes" << endl;
 }
     
 int main(){
@@ -93,7 +111,7 @@ cin.tie(NULL);
 
     
 ll q=1;
-cin>>q;
+//cin>>q;
 for(ll i=0;i<q;i++){
    // google(i+1);
     solve();

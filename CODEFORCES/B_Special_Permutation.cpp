@@ -83,6 +83,66 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+    inp(n);
+    inp(mini);
+    inp(maxy);
+    if(mini>(n/2)+1 || maxy<(n/2) )
+    {
+        cout<<-1<<endl;
+        return;
+    }
+    if(mini<=n/2 && maxy<=n/2)
+    {
+        cout<<-1<<endl;
+        return;
+    }
+    if(mini==(n/2)+1)
+    {
+        if(maxy!=n/2)
+        cout<<-1<<endl;
+        else
+        {
+        for(ll i=mini;i<=n;++i)
+        {
+            cout<<i<<" ";
+        }
+        for(ll i=1;i<=maxy;++i)
+        {
+            cout<<i<<" ";
+        }
+        cout<<endl;
+        }
+        return;
+    }
+    vector<ll> left,right;
+    vector<ll> vis(n+1,0);
+    right.pb(maxy);
+    vis[maxy]=1;
+    for(ll i=1;i<mini;++i)
+    {
+        if(right.size()==n/2)
+        break;
+        right.pb(i);
+        vis[i]=1;
+    }
+    while(right.size()!=n/2)
+    {
+        right.pb(++mini);
+        vis[mini]=1;
+    }
+    for(ll i=1;i<=n;++i)
+    {
+        if(!vis[i])
+        left.pb(i);
+    }
+    // printv(left);
+    // printv(right);
+    // cout<<"////////";
+    for(auto &i:left)
+    cout<<i<<" ";
+    for(auto &i:right)
+    cout<<i<<" ";
+    cout<<endl;
 
 }
     
@@ -172,16 +232,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

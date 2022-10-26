@@ -83,6 +83,34 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+ int n; cin>>n;
+        vector<int> arr(n);
+        for(int i=0; i<n; i++)cin>>arr[i];
+        vector<vector<int>> cnt(32);
+        for(int i=0; i<n; i++){
+            //cout<<__builtin_popcount(arr[i])<<endl;
+            cnt[__builtin_popcount(arr[i])].push_back(i);
+        }
+
+        // for(auto &i:cnt)
+        // printv(i);
+        for(int i=0;i<cnt.size();++i)
+        {
+            for(auto &j:cnt[i])
+            cout<<i<<" "<<j<<" ";
+            cout<<endl;
+        }
+
+        cout<<"hla"<<endl;
+
+        sort(arr.begin(), arr.end());
+        vector<int> ans(n);
+        for(int i=n-1; i>=0; i--){
+            ans[cnt[__builtin_popcount(arr[i])].back()]=arr[i];
+            cnt[__builtin_popcount(arr[i])].pop_back();
+        }
+        for(int i=0; i<n; i++)cout<<ans[i]<<" ";
+        cout<<endl;
 
 }
     
@@ -172,16 +200,5 @@ A.erase(x)          -->if x is present then erases it from the ordered set
 printing the pbds -->similar to maps,sets and vectors
 //all tc-->logn
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
 
 */

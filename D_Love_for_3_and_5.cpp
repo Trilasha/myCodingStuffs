@@ -78,13 +78,94 @@ AVOID creating any prefix product array in case of modulo problems
 }
 
 
+// const int N=1e9;
+// vector<ll> three;
+// vector<ll> five;
+// vector<ll> v;
+// void pre()
+// {
+// ll x=1;
+// while(x<=N)
+// {
+//     three.pb(x);
+//     x*=3;
+// }
+// x=1;
+// while(x<=N)
+// {
+//     five.pb(x);
+//     x*=5;
+// }
+// for(auto &i:three)
+// {
+//     for(auto &j:five)
+//     {
+//         v.pb(i*j);
+//     }
+// }
+// sort(all(v));
+// }
+// void solve()
+// {
+// inp(l);
+// inp(r);
+
+// printv(three);
+// // ll rr=lower_bound(all(v),r)-v.begin();
+// // cout<<rr<<endl;
+// // if(v[rr]==r)
+// // rr++;
+
+// // ll lef=lower_bound(all(v),l)-v.begin();
+// // cout<<lef<<endl;
+// // cout<<rr-lef<<endl;
+// }
+const int N= 1e9;
+set<ll> ok;
+vector<ll> ps;
+vector<ll> u,v;
+void pre(){
     
-
-
-void solve()
-{
-
+   ll x=1, y=1;
+   while(x<N+1){
+        u.pb(x);
+        x*=3;
+   }
+ 
+   while(y<N+1){
+        v.pb(y);
+        y*=5;
+   }
+   
+  
+   for(auto i:u){
+        for(auto j:v){
+            ok.insert(i*j);
+        }
+   }
+ 
+   for(auto i:ok) ps.pb(i);
+ 
 }
+ 
+ 
+ 
+
+ 
+ 
+void solve(){
+    ll l, r;
+    cin>>l>>r;
+    //printv(u);
+   ll ans= lower_bound(all(ps), r)-ps.begin();
+   ll ind= lower_bound(all(ps), l)-ps.begin();
+ 
+   if(ind!=ps.size() &&  ps[ind]<l) ind++;
+   if(ind!=ps.size() && ps[ans]==r) ans++;
+ 
+   cout<<ans-ind<<endl;
+}
+
     
 int main(){
 

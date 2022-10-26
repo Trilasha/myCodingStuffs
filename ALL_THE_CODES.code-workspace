@@ -18,7 +18,8 @@
 			"xstring": "cpp",
 			"xutility": "cpp",
 			"map": "cpp",
-			"cmath": "cpp"
+			"cmath": "cpp",
+			"unordered_map": "cpp"
 		}
 	}
 }

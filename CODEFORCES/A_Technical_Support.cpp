@@ -83,7 +83,27 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
-
+inp(n);
+string s;
+cin>>s;
+ll ctq=0;
+ll cta=0;
+// fr(i,s.size())
+// {
+//     if(s[i]=='Q')
+//     ctq++;
+// }
+fr(i,s.size())
+{
+  if(s[i]=='Q')
+  ctq++;
+  if(s[i]=='A' && ctq!=0) 
+  ctq--;
+}
+if(ctq>0)
+cout<<"No"<<endl;
+else
+cout<<"Yes"<<endl;
 }
     
 int main(){

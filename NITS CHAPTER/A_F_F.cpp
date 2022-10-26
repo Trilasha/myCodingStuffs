@@ -83,7 +83,21 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
-
+inp(n);
+vector<ll> ini(n),fin(n);
+inpv(ini);
+inpv(fin);
+ll maxy=fin[0]-ini[0];
+ll index=1;
+for(ll i=1;i<n;++i)
+{
+    if(fin[i]-ini[i]>maxy)
+    {
+        maxy=fin[i]-ini[i];
+        index=i+1;
+    }
+}
+cout<<index<<endl;
 }
     
 int main(){
@@ -93,7 +107,7 @@ cin.tie(NULL);
 
     
 ll q=1;
-cin>>q;
+//cin>>q;
 for(ll i=0;i<q;i++){
    // google(i+1);
     solve();

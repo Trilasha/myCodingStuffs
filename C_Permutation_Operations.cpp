@@ -83,6 +83,40 @@ AVOID creating any prefix product array in case of modulo problems
 
 void solve()
 {
+inp(n);
+vector<ll> v(n);
+inpv(v);
+vector<pll> vp;
+ll chk=0;
+ll ct=0;
+for(ll i=0;i<n-1;++i)
+{
+    if(v[i]>v[i+1])
+    {
+        ll diff=v[i]-v[i+1];
+        vp.pb({diff,i+2});
+        chk=1;
+        ct++;
+    }
+}
+sort(all(vp));
+vector<ll> ans(n,1);
+
+
+if(chk==0)
+{
+printv(ans);
+}
+else
+{
+for(ll i=0;i<n-ct;++i)
+cout<<1<<" ";
+
+for(auto &i:vp)
+cout<<i.second<<" ";
+
+cout<<endl;
+}
 
 }
     

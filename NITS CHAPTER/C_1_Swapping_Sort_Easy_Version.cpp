@@ -2,20 +2,9 @@
 Trilasha Mazumder
 2112063
 */
-
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
-
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp> 
-
-
 using namespace std;
-using namespace __gnu_pbds;
-
-typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
-
-
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
@@ -48,62 +37,91 @@ typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_stat
 #define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
-
-
-/// ------------------------------------NUMBER THEORY--------------------------------------------- ///
-vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
-//vector<ll> v= sieve(1e5+10);
-////TC--> nloglogn
-
 /// ------------------------------------PRINTOUTS------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 
+
 /// ---------------------------------------------------------------------------------------------- ///
 //ceil(log2(x))
-//is_sorted(all(v))
-//is_sorted(s.begin(), s.end())
+    
 /// ---------------------------------------------------------------------------------------------- ///
     
 
 
-bool checku(string &s)
-{
-    string a="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    fr(i,a.size())
-    {
-        if(s.find(a[i])!=string::npos)
-        return true;
-    }
-    return false;
-}
-bool checkl(string &s)
-{
-    string a="abcdefghijklmnopqrstuvwxyz";
-    fr(i,a.size())
-    {
-        if(s.find(a[i])!=string::npos)
-        return true;
-    }
-    return false;
-}
-bool checkn(string &s)
-{
-    string a="0123456789";
-    fr(i,a.size())
-    {
-        if(s.find(a[i])!=string::npos)
-        return true;
-    }
-    return false;
-}
+// bool check(vector<ll> &v)
+// {
+//     fr(i,v.size())
+//     {
+//     if(v[i]!=(i+1))
+//     return false;
+//     }
+//     return true;
+// }
 void solve(){
-   string s;
-   cin>>s;
-   if(checku(s) && checkl(s) && check(n))
-   cout<<"YES"<<endl;
-   else
-   cout<<"NO"<<endl;
+   inp(n);
+   vector<ll> v(n);
+   inpv(v);
+   //vector<ll> copy=v;
+   //sort(copy.begin(),copy.end());
+   fr(i,n)
+   {
+    if(i%2==0 && v[i]%2==0)
+    {
+        cout<<-1<<endl;
+        return;
+    }
+    if(i%2!=0 && v[i]%2!=0)
+    {
+        cout<<-1<<endl;
+        return;
+    }
+   }
+   ll ct=0;
+   vector<ll> odd,even;
+   fr(i,n)
+   {
+    if(v[i]%2==0)
+    even.pb(v[i]);
+    else
+    odd.pb(v[i]);
+   }
+//    printv(odd);
+//    printv(even);
+   
+//    if(check(v))
+//    {
+//     cout<<0<<endl;
+//     return;
+//    }
+if(is_sorted(all(v)))
+{
+    cout<<0<<endl;
+    return;
+}
+   for(ll i=0;i<odd.size()-1;++i)
+   {
+    for(ll j=odd.size()-1;j>0;--j)
+    {
+        if(odd[j]<odd[j-1])
+        {
+            swap(odd[j],odd[j-1]);
+            ct++;
+        }
+    }
+   }
+   for(ll i=0;i<even.size()-1;++i)
+   {
+    for(ll j=even.size()-1;j>0;--j)
+    {
+        if(even[j]<even[j-1])
+        {
+            swap(even[j],even[j-1]);
+            ct++;
+        }
+    }
+   }
+   cout<<ct<<endl;
 }
     
 int main(){
@@ -128,50 +146,12 @@ while(q--)
 
 
 
-
-
-
-
-
-
-
 /*
-//////
+//
 string s=to_string(bitset<64> b(10));
-
-////////
+//
 stack,queue->no index access
 use deque,vectors
 -->assign(n,val)available for both
 -->take size +1(extra) for vectors
-
-
-////////// working with iterators  //////////
-auto it=upper_bound(all(v),i);
-it--;
-ll index=it-v.begin();
-
-
-/////////////////////////////////////////////////////////// PBDS ////////////////////////////////////////////////////////
-//for the 'less' one
-//exactly functions like SET but with added benefits of-->count of the elements less than a particular value and indexing
-//if written 'greater' instead of 'less'     --> values will be sorted in descending order then
-//if written 'less_equal' instead of 'less'  --> works like MULTISET(duplicates will also exist then)
-
-pbds A;
-*A.find_by_order(x) -->returns the element present at the xth index
-A.order_of_key(x)   -->returns the number of elements strictly lesser than x
-A.erase(x)          -->if x is present then erases it from the ordered set
-
-*******All the properties of SET like size(),begin(),end() can be used*******
-1 2 7 8
-*A.lower_bound(6) -->7
-*A.lower_bound(2) -->2
-*A.upper_bound(6) -->7
-*A.upper_bound(2) -->7
-
-printing the pbds -->similar to maps,sets and vectors
-//all tc-->logn
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 */
