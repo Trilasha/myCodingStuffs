@@ -7,14 +7,14 @@ Trilasha Mazumder
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp> 
+//#include <ext/pb_ds/assoc_container.hpp>
+//#include <ext/pb_ds/tree_policy.hpp> 
 
 
 using namespace std;
-using namespace __gnu_pbds;
+//using namespace __gnu_pbds;
 
-typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
+//typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
 
 #define ll                    long long
@@ -59,31 +59,17 @@ TC--> nloglogn
 /// ------------------------------------PRINTOUTS------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
+#define printset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
+#define line                  cout<<"----------------------------------------"<<endl;
 void google(ll t) {cout << "Case #" << t << ": ";}
 
-
-void avoid_error()
-{
-/*
-when the ans vector contains modulated values,then take the modulo(%) while calculating the elements' value...DON'T JUST PUT % AT THE TIME OF INSERTION 
-CORRECT                     :-loop-->anss=(anss*powers[j])%(nn); then ans.pb(anss);
-WRONG(tle,rte or wa)        :-loop-->anss=(anss*powers[j]); then ans.pb(anss%nn);
-AVOID creating any prefix product array in case of modulo problems
-
--->take size +1(atleast extra) for vectors to avoid out of bounds
-
--->ll suma=accumulate(all(a),0LL);
-//put OLL or else WA for larger sum
-*/
-}
-
-
-    
+/// ---------------------------------------------------------------------------------------------- ///
+//  v[i]=pow(10,v[i])+0.1; 
 
 
 void solve()
 {
-
+  
 }
     
 int main(){
@@ -115,73 +101,3 @@ for(ll i=0;i<q;i++){
 
 
 
-/*
-
-/// ----------------------------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
-//is_sorted(all(v))
-//is_sorted(s.begin(), s.end())
-//number of subarrays in an array of size 'n' = (n*(n+1))/2;
-
-
-//string upp="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//string low="abcdefghijklmnopqrstuvwxyz";
-//string num="0123456789";
-
-//double sum=0;
-//cout << fixed << setprecision(6) << sum << endl;
-/// ----------------------------------------------------------------------------------------------------------------- ///
-
-
-////////
-bitset<64> b(n);
-string s=b.to_string();
-//n<=1e18 can be expressesed in 64 bit string
-
-////////
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
-
-
-
-////////// working with iterators  //////////
-auto it=upper_bound(all(v),i);
-it--;
-ll index=it-v.begin();
-
-
-/////////////////////////////////////////////////////////// PBDS ////////////////////////////////////////////////////////
-//for the 'less' one
-//exactly functions like SET but with added benefits of-->count of the elements less than a particular value and indexing
-//if written 'greater' instead of 'less'     --> values will be sorted in descending order then
-//if written 'less_equal' instead of 'less'  --> works like MULTISET(duplicates will also exist then)
-
-pbds A;
-*A.find_by_order(x) -->returns the element present at the xth index
-A.order_of_key(x)   -->returns the number of elements strictly lesser than x
-A.erase(x)          -->if x is present then erases it from the ordered set
-
-*******All the properties of SET like size(),begin(),end() can be used*******
-1 2 7 8
-*A.lower_bound(6) -->7
-*A.lower_bound(2) -->2
-*A.upper_bound(6) -->7
-*A.upper_bound(2) -->7
-
-printing the pbds -->similar to maps,sets and vectors
-//all tc-->logn
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-string s="";
-s.pb(9+'0');
-s.pb('a');
-s.pb('a'+2);
-cout<<s<<endl;
-cout<<s[0]-'0';
-//9ac
-//9
-
-*/

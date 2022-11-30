@@ -63,19 +63,28 @@ ade
     string findOrder(string dict[], int N, int K) {
         //code here
         vector<vector<int>> newAdj(K);
+		int chk=0;
+		set<char> st;
         for(int i=0;i<N-1;++i)
         {
             string s1=dict[i];
             string s2=dict[i+1];
             int len=min(s1.size(),s2.size());
+			chk=0;
             for(int i=0;i<len;++i)
             {
                 if(s1[i]!=s2[i])
                 {
+					chk=1;
                     newAdj[s1[i]-'a'].push_back(s2[i]-'a');
                     break;
                 }
             }
+			if(chk==0 && s1.size()>s2.size())
+			{
+				cout<<"Impossible"<<endl;
+				return;
+			}
         }
         
         vector<int> topo=toposort(newAdj,K);

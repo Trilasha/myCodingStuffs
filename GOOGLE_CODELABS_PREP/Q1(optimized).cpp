@@ -103,7 +103,7 @@ void solve(){
     if(index<1)
     {
     if(mp[x]!=0)
-    cout<<1<<endl;
+    cout<<mp[x]<<endl;
     else
     cout<<0<<endl;
     }
@@ -145,43 +145,3 @@ while(q--)
 
 
 
-/*
-//////
-string s=to_string(bitset<64> b(10));
-
-////////
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
-
-
-////////// working with iterators  //////////
-auto it=upper_bound(all(v),i);
-it--;
-ll index=it-v.begin();
-
-
-/////////////////////////////////////////////////////////// PBDS ////////////////////////////////////////////////////////
-//for the 'less' one
-//exactly functions like SET but with added benefits of-->count of the elements less than a particular value and indexing
-//if written 'greater' instead of 'less'     --> values will be sorted in descending order then
-//if written 'less_equal' instead of 'less'  --> works like MULTISET(duplicates will also exist then)
-
-pbds A;
-*A.find_by_order(x) -->returns the element present at the xth index
-A.order_of_key(x)   -->returns the number of elements strictly lesser than x
-A.erase(x)          -->if x is present then erases it from the ordered set
-
-*******All the properties of SET like size(),begin(),end() can be used*******
-1 2 7 8
-*A.lower_bound(6) -->7
-*A.lower_bound(2) -->2
-*A.upper_bound(6) -->7
-*A.upper_bound(2) -->7
-
-printing the pbds -->similar to maps,sets and vectors
-//all tc-->logn
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-*/

@@ -6,7 +6,7 @@ int main()
     a=2;
     b = 3;
     printf("a!b=%d\n", !b);
-    printf("a&b=%d\n", a&b);gcc 
+    printf("a&b=%d\n", a&b);
     printf("a+b=%d\n", a+b);
     printf("a-b=%d\n", a-b);
     printf("a*b=%d\n", a*b);

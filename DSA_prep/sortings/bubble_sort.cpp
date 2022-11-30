@@ -18,11 +18,13 @@
             break;
         }
 
-
-//can be used to count the minimum number of swaps required 
+    }
+//can be used to count the minimum number of swaps required (when only adjacent swapping is allowed)
 ////////bool swapped variable is a must
 
 
 //tc->O(n^2)
 //sc->O(1)
 //code not got accepted in the gfg ide:(
+
+//the largest one goes to the end then the second largest one and so on
