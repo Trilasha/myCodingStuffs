@@ -1,6 +1,7 @@
 /* C++ implementation of QuickSort */
 //tc--> 3 cases check it out
 //inplace and not stable
+//nlogn to n2
 
 
 

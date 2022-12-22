@@ -1,4 +1,4 @@
-//set can be used to deleetd the already existing paths however there will be an introductin of logn for the set erase operation so the time complexity will not be bettwe much so unaffected can be said
+//set can be used to delete the already existing paths however there will be an introductin of logn for the set erase operation so the time complexity will not be much so unaffected can be said
 //since erase operation is not avaialble in priority queues
 
 

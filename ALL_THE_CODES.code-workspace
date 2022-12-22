@@ -19,7 +19,8 @@
 			"xutility": "cpp",
 			"map": "cpp",
 			"cmath": "cpp",
-			"unordered_map": "cpp"
+			"unordered_map": "cpp",
+			"utility": "cpp"
 		}
 	}
 }
