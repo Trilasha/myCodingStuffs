@@ -1,1 +1,0 @@
-{"name":"Local: I_I","url":"e:\\ALL_THE_CODES\\DSA_prep\\dp\\cf\\I_I.cpp","tests":[{"id":1670044473736,"input":"10 3\n1 4 8","output":"9"},{"id":1670044480774,"input":"20 4\n5 7 12 18","output":"19"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ALL_THE_CODES\\DSA_prep\\dp\\cf\\I_I.cpp","group":"local","local":true}

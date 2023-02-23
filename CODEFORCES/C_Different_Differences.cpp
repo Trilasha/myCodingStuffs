@@ -31,7 +31,7 @@ using namespace std;
 #define maxpq                 priority_queue <ll> pq;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define maxval                1000000007
+#define mod                   1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -51,6 +51,7 @@ using namespace std;
 
 /// ------------------------------------NUMBER THEORY--------------------------------------------- ///
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
+ll phi(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
 /*
 vector<ll> v= sieve(1e5+10);
 TC--> nloglogn
@@ -65,57 +66,48 @@ void google(ll t) {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
 //  v[i]=pow(10,v[i])+0.1; 
+//max 1e7 size vector can be created
+///vector<vector<int>> M;
+//int m = number of rows, n = number of columns;
+//M.resize(m, vector<int>(n));
+//binary_search(all(v),5)-->returns boolean value
+
+
+
 
 
 void solve()
 {
-  inp(k);
-  inp(n);
-
-  vector<ll> ans;
-
-  ll ct=1;
-  ll ind=1;
-  ll last=0;
-  ans.pb(1);
-  ll var=0;
-  var=ind+ct;
-
-  ll count=1;
-  ll chk=0;
-
-
-  while(ans.size()<k)
-  {
-    if(var>n)
+    ll k,n;
+    cin>>k>>n;
+    vector<ll> ans;
+    ll ct=0;
+    ll val=0;
+    for(ll i=0;i<k;++i)
     {
-     if()   
+        ct++;
+        val+=ct;
+        if((k-i-1)<=(n-val))
+        ans.pb(val);
+        else
+        break;
+        
     }
-    if(var<=n)
+
+    while(ans.size()<k)
     {
-    count++;
-    ans.pb(var);
-    last=var;
-    ct++;
-    var=var+ct;
+        ans.pb(ans[ans.size()-1]+1);
     }
-  }
 
-  for(ll i=last+1;i<=n;++i)
-  {
-    if(ans.size()==k)
-    break;
-    ans.pb(i);
-  }
+    printv(ans);
 
-  printv(ans);
+
 }
     
 int main(){
 
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
-
     
 ll q=1;
 cin>>q;
@@ -125,6 +117,25 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

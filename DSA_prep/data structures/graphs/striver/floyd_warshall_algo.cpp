@@ -40,7 +40,7 @@
 	    {
 	        if(matrix[i][i]<0)
 	        {
-	        //then given the condition
+	        //then give the condition
 	        }
 	    }
 	    

@@ -29,3 +29,31 @@ public:
         return ans; 
     }
 };
+
+
+
+
+
+void level_order_traversal(Node* root,vector<int> &inorder)
+{
+    if(root==NULL)
+    return {};
+
+    queue<Node* > queue1;
+    queue1.push(root);
+
+    while(!queue1.empty())
+    {
+        Node* curr_node=queue1.front();
+        inorder.push_back(curr_node->val);
+        queue1.pop();
+
+        if(curr_node->left)
+        queue1.push(curr_node->left);
+        if(curr_node->right)
+        queue1.push(curr_node->right);
+
+    }
+
+
+}

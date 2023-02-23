@@ -6,10 +6,10 @@
 
 // 1 2 3 -10 2 3
 
-// Int max_subarray_sum(vector<int> v)
+// int max_subarray_sum(vector<int> v)
 // {
-// Int ans=0;
-// Int var=INT_MIN;
+// int ans=0;
+// int var=int_MIN;
 // for(int i=0;i<v.size();++i)
 // {
 // var=max(v[i],var+v[i]);
@@ -20,10 +20,10 @@
 // }
 
 
-// Int max_sum(vector<int> v)
+// int max_sum(vector<int> v)
 // {
-// Int ans=INT_MIN;
-// Int sum;
+// int ans=int_MIN;
+// int sum;
 
 //             for(int i=0;i<n;++i)
 //             {
@@ -48,3 +48,46 @@
 
 
 
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main()
+{
+    vector<int> num={6,5};
+    int n=num.size();
+	int first_max=num[0];
+	int second_max=num[0];
+	int check=0;
+
+	for(int x=0;x<n;++x)
+	{
+        check=0;
+		if(num[x]>first_max)
+		{
+            first_max=num[x];
+            check=1;
+        }
+
+        if((num[x]>second_max || first_max==second_max) && check==0)
+        {
+            second_max=num[x];
+        }
+    }
+
+
+// for(int x=0;x<n;++x)
+// {
+// 	if(num[x]>second_max && num[x]<first_max)
+// 		{
+// 			second_max=num[x];
+// }
+// }
+
+
+cout<<first_max<<" "<<second_max<<endl;
+
+    return 0;
+}

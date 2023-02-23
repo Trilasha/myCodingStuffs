@@ -1,1 +1,0 @@
-{"name":"Local: kick1","url":"e:\\ALL_THE_CODES\\kick1.cpp","tests":[{"id":1668226393176,"input":"2\n5 3\n8 C\n3 C\n6 C\n8 4\n5 C\n9 C\n8 C\n20 C","output":""},{"id":1669178113297,"input":"","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ALL_THE_CODES\\kick1.cpp","group":"local","local":true}

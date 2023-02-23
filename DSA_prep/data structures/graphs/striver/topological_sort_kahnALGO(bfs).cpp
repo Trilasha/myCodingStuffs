@@ -2,6 +2,8 @@ public:
 	//Function to return list containing vertices in Topological order. 
 	//tc-->v+e
 	//sc-->n
+
+
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
@@ -38,3 +40,54 @@ public:
 	    return topo;
 	    
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// struct node{
+// 	int data;
+// 	struct node* next;
+// }
+
+// struct node* head;
+
+// void insert()
+// {
+// 	struct node* ptr;
+// 	ptr=(struct node)malloc(sizeof(struct node*));
+// 	int item;
+// 	scanf("%d",&item);
+// 	ptr->data=item;
+// 	if(head==NULL)
+// 	{
+// 		head=ptr;
+// 		ptr->next=NULL;
+// 		return;
+// 	}
+// }
+
+// void delete()
+// {
+
+}

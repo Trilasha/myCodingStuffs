@@ -3,17 +3,18 @@ Trilasha Mazumder
 2112063
 */
 
+
 /// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
 
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp> 
+//#include <ext/pb_ds/assoc_container.hpp>
+//#include <ext/pb_ds/tree_policy.hpp> 
 
 
 using namespace std;
-using namespace __gnu_pbds;
+//using namespace __gnu_pbds;
 
-typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
+//typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
 
 #define ll                    long long
@@ -29,8 +30,9 @@ typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_stat
 #define pi                    pair<ll,ll> 
 #define maxpq                 priority_queue <ll> pq;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
+#define sp(x)                 fixed<<setprecision(x)
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define maxval                1000000007
+#define mod                   1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -44,108 +46,108 @@ typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_stat
 #define fD(i,a,n)             for(ll i=a;i>=(n);--i)
 #define dsort(arr)            sort(arr,arr+n,greater<ll>())
 #define asort(arr)            sort(arr,arr+n)
-#define allasort(str)         sort(str.begin(), str.end())
-#define alldsort(str)         sort(str.begin(), str.end(),greater<char>())
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
+
+
+/// ------------------------------------NUMBER THEORY--------------------------------------------- ///
+vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
+ll phi(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
+ll bpow(int base,int power){int res=1;while(power){if(power&1){res *= base;power--;}else{base *= base;power /=2;}}return res;}
+/*
+vector<ll> v= sieve(1e5+10);
+TC--> nloglogn
+*/
+
 /// ------------------------------------PRINTOUTS------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
-
+#define printset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
+#define line                  cout<<"----------------------------------------"<<endl;
+void google(ll t)             {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
-//ceil(log2(x))
-//is_sorted(all(v))
-//is_sorted(s.begin(), s.end())
-/// ---------------------------------------------------------------------------------------------- ///
-    
+//  v[i]=pow(10,v[i])+0.1; 
+//max 1e7 size vector can be created
+///vector<vector<int>> M;
+//M.resize(m, vector<int>(n));
+//binary_search(all(v),5)-->returns boolean value
+// iota(all(v),10); -- > o/p--> 10 11 12 13 14 15 16 17 18 19
+// a + b = a ^ b + 2 * (a & b)
+///------------------------------------------------------------------------------------------------///
 
 
-// bool check(vector<string> &v,ll n,ll k)
-// {
-//     for(auto &i:v)
-//     {
-//     if(i.size()!=(n/k))
-//     return false;
-//     }
-//     return true;
-// }
-void solve(){
-inp(n);
-inp(k);
-string s;
-cin>>s;
-map<char,ll> mp;
-fr(i,s.size())
-mp[s[i]]++;
-//printmap(mp);
 
-ll each_comp=n/k;
 
-string ans="";
-fr(i,k)
+void solve()
 {
-    char ct='a';
-    each_comp=n/k;
-    while(each_comp!=0 && mp[ct]!=0)
+    ll n,k;
+    cin>>n>>k;
+
+    string s;
+    cin>>s;
+
+    map<char,ll> mp;
+    fr(i,n)
+    mp[s[i]]++;
+
+    vector<vector<char>> arr(k,vector<char>(n/k,'*'));
+    ll ind=0;
+
+    for(ll i=0;i<k;++i)
     {
-        mp[ct]--;
-        each_comp--;
-        ct=char(ct+1);
+        ind=0;
+        for(auto &j:mp)
+        {
+            if(ind==(n/k))
+            break;
+            else if(j.second!=0)
+            {
+                arr[i][ind]=j.first;
+                j.second--;
+                ind++;
+            }
+        }
     }
-    ans.pb(ct);
-}
-cout<<ans<<endl;
+
+    string ans="";
+    for(ll i=0;i<k;++i)
+    {
+        for(int j=0;j<n/k;++j)
+        {
+            if(arr[i][0]!='a' || arr[i][j]=='*')
+            {
+            ans+='a';
+            break;
+            }
+            else if((j!=((n/k)-1)) && (arr[i][j]+1)!=arr[i][j+1])
+            {
+                ans+=char(arr[i][j]+1);
+                break;
+            }
+            else if(j==(n/k-1))
+            {
+                ans+=char(arr[i][j]+1);
+                break;
+            }
+
+        }
+    }
+
+
+    cout<<ans<<endl;
 }
     
 int main(){
 
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
-
     
-ll q;
+ll q=1;
 cin>>q;
-while(q--)
-{
+for(ll i=0;i<q;i++){
+   // google(i+1);
     solve();
 }
     return 0;
 }
-
-
-
-
-
-
-
-
-/*
-//
-string s=to_string(bitset<64> b(10));
-//
-stack,queue->no index access
-use deque,vectors
--->assign(n,val)available for both
--->take size +1(extra) for vectors
-/////////////////////////////////////////////////////////// PBDS ////////////////////////////////////////////////////////
-//for the 'less' one
-//exactly functions like SET but with added benefits of-->count of the elements less than a particular value and indexing
-//if written 'greater' instead of 'less'     --> values will be in sorted in descending order then
-//if written 'less_equal' instead of 'less'  --> works like MULTISET(duplicates will also exist then)
-
-pbds A;
-*A.find_by_order(x) -->returns the element present at the xth index
-A.order_of_key(x)   -->returns the number of elements strictly lesser than x
-A.erase(x)          -->if x is present then erases it from the ordered set
-
-1 2 7 8
-*A.lower_bound(6) -->7
-*A.lower_bound(2) -->2
-*A.upper_bound(6) -->7
-*A.upper_bound(2) -->7
-
-
-*/
-
-//ccccb'

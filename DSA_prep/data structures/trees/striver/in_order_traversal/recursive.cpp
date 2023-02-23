@@ -61,3 +61,24 @@ int main() {
   }
   return 0;
 }
+
+
+
+
+
+// struct node{
+//   int data;
+//   struct node* left,*right;
+// }
+
+
+
+// struct node* newNode(int data)
+// {
+//   struct node* node=(struct node*)malloc(sizeof(struct node));
+//   node->data
+
+//   return node;
+// }
+
+

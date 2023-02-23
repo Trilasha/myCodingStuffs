@@ -43,8 +43,8 @@ public:
                     prev->right=curr;
 
                     preorder.push_back(curr->val);
-                    //just the above line's position has been changes rest of the code is exactly 
-                    //similar as the inorder
+                    //just the above line's position has been changed rest of the code is exactly 
+                    //similar as that of the inorder
 
                     //now move to the left of the curr to follow the same steps again
                     curr=curr->left;

@@ -19,6 +19,7 @@
         }
         return false;
     }
+    
     bool isCycle(int V, vector<int> adj[]) {
         // Code here
         vector<int> vis(V,0);
@@ -32,4 +33,3 @@
         }
         return false;
     }
-};

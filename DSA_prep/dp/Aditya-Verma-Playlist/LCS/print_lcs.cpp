@@ -1,3 +1,11 @@
+/*
+
+https://www.geeksforgeeks.org/printing-longest-common-subsequence/?ref=gcse
+
+*/
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -27,6 +35,7 @@ int main()
         x--;
     }
 
+    reverse(all(ans));
     return ans;
     return 0;
 }

@@ -1,6 +1,8 @@
 // C++ program for Merge Sort
 //tc--> nlogn
 //as--> n
+//not inplace
+//stable
 
 
 

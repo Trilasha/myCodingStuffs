@@ -20,7 +20,14 @@
 			"map": "cpp",
 			"cmath": "cpp",
 			"unordered_map": "cpp",
-			"utility": "cpp"
+			"utility": "cpp",
+			"iosfwd": "cpp",
+			"bitset": "cpp",
+			"set": "cpp",
+			"deque": "cpp",
+			"limits": "cpp",
+			"queue": "cpp",
+			"stack": "cpp"
 		}
 	}
 }

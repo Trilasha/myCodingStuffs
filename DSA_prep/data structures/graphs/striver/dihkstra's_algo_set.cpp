@@ -16,7 +16,7 @@
         // Code here
         // priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
        
-       set<pair<int,int>> s;
+        set<pair<int,int>> s;
         vector<int> dis(V,1e9);
         
         dis[S]=0;

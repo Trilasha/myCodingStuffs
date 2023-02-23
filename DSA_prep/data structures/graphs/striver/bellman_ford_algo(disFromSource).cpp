@@ -8,7 +8,7 @@
 
 //applicable "ONLY" in "...DIRECTED GRAPHS..."
 
-//if undirected graph is given then chamge it to DG to implement bellman ford algo
+//if undirected graph is given then change it to DG to implement bellman ford algo
 //like 1---2 (5)  so we have 1--->2 (5) and 2--->1 (5)
 //if a graph has any pathweight lesser than 0 then we can say that it has got a negative cycle
 

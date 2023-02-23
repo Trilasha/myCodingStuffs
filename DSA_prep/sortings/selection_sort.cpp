@@ -17,3 +17,9 @@
 //SC-->O(1)
 
 //smallest one comes first then the second smallest and so on
+
+
+
+
+//inplace
+//stable selection sort available

@@ -50,7 +50,7 @@ class Solution
 	//Function to find sum of weights of edges of the Minimum Spanning Tree.
     int spanningTree(int V, vector<vector<int>> adj[])
     {
-        //even though bidirectional(repetition of edges) but it will not be considered after the efirst encounter
+        //even though bidirectional(repetition of edges) but it will not be considered after the first encounter
         vector<pair<int,pair<int,int>>> edges;
         
         
