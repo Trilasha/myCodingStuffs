@@ -16,7 +16,7 @@ using namespace std;
 
 //typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
-
+           
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
@@ -32,7 +32,8 @@ using namespace std;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 #define sp(x)                 fixed<<setprecision(x)
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define mod                   1000000007
+#define md                    998244353
+#define modval                1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -69,18 +70,6 @@ TC--> nloglogn
 void google(ll t)             {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
-// v[i]=pow(10,v[i])+0.1; 
-// max 1e7 size vector can be created
-// vector<vector<int>> M;
-// M.resize(m, vector<int>(n));
-// binary_search(all(v),5)-->returns boolean value
-// iota(all(v),10); -- > o/p--> 10 11 12 13 14 15 16 17 18 19
-// a + b = a ^ b + 2 * (a & b)
-
-// bitset<32> b(n);
-// string s=b.to_string();
-// b.to_ullong()
-///------------------------------------------------------------------------------------------------///
 
 
 
@@ -88,18 +77,42 @@ void google(ll t)             {cout << "Case #" << t << ": ";}
 
 void solve()
 {
-    ll n,a,b;
-    cin>>n>>a>>b;
+    ll n;
+    cin>>n;
+    vector<string> v;
+    ll r=2*n-2;
+    set<string> st;
 
-    if(a>=n-1)
+    fr(i,r)
     {
+        string s;
+        cin>>s;
+        v.pb(s);
+        st.insert(s);
+    }
+
+    if(n==2)
+    {
+        if(st.size()==1)
+        cout<<"YES"<<endl;
+        else
         cout<<"NO"<<endl;
         return;
     }
 
-    ll sum=a+b;
-    ll rem=(n-1)%sum;
-    cout<<((rem<=a)?"NO":"YES")<<endl;
+    ll chk=0;
+    fr(i,r)
+    {
+        string temp=v[i];
+        reverse(all(temp));
+        if(st.find(temp)==st.end())
+        {
+            cout<<"NO"<<endl;
+            return;
+        }
+    }
+
+    cout<<"YES"<<endl;
 }
 
 
@@ -116,3 +129,19 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,7 +16,7 @@ using namespace std;
 
 //typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
-
+           
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
@@ -32,7 +32,8 @@ using namespace std;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 #define sp(x)                 fixed<<setprecision(x)
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define mod                   1000000007
+#define md                    998244353
+#define modval                1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -69,18 +70,6 @@ TC--> nloglogn
 void google(ll t)             {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
-// v[i]=pow(10,v[i])+0.1; 
-// max 1e7 size vector can be created
-// vector<vector<int>> M;
-// M.resize(m, vector<int>(n));
-// binary_search(all(v),5)-->returns boolean value
-// iota(all(v),10); -- > o/p--> 10 11 12 13 14 15 16 17 18 19
-// a + b = a ^ b + 2 * (a & b)
-
-// bitset<32> b(n);
-// string s=b.to_string();
-// b.to_ullong()
-///------------------------------------------------------------------------------------------------///
 
 
 
@@ -88,18 +77,30 @@ void google(ll t)             {cout << "Case #" << t << ": ";}
 
 void solve()
 {
-    ll n,a,b;
-    cin>>n>>a>>b;
+    ll n;
+    cin>>n;
 
-    if(a>=n-1)
+    vector<ll> v(n);
+    inpv(v);
+
+    ll i=0,j=0;
+    vector<ll> ans(n);
+
+    for(ll i=0;i<n;++i)
     {
-        cout<<"NO"<<endl;
-        return;
+        //since 0-based indexing
+        ll curr_len=i-j+1;
+        //decreasing the curr_len until a value >= curr_len is encountered
+        while(curr_len>v[j] && j<i)
+        {
+            j++;
+            curr_len=i-j+1;
+        }
+
+        ans[i]=i-j+1;
     }
 
-    ll sum=a+b;
-    ll rem=(n-1)%sum;
-    cout<<((rem<=a)?"NO":"YES")<<endl;
+    printv(ans);
 }
 
 
@@ -116,3 +117,19 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

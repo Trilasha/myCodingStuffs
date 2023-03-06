@@ -414,6 +414,33 @@ ll maximum_subarray_sum(vector<ll> &v)
             i++;
         }
     }
+
+
+
+ for (ll i=1; i<100000; i++) {
+        ll x = i * i * i; 
+        if (x > 1e12) {
+            break;
+        }
+        cube_roots.push_back(x);
+    }
+
+
+//to achieve the "sum" using "chance" number of positions
+//https://codeforces.com/problemset/problem/476/B
+double canrep(int sum, int chance) {
+	if((sum - chance) % 2 != 0 || abs(sum) > chance){
+		return 0;
+	}
+	sum = abs(sum);
+	int p = (chance + sum) / 2;
+	int n = (chance - sum) / 2;
+	double ans = factorial(p+n);
+	ans /= factorial(p);
+	ans /= factorial(n);
+	return ans;
+}
+
 /*//////////////////////////////////////////////////  TAKING PREFIX SUM   /////////////////////////////////////////////////////
 ll pf[n];
     for (ll i = 0; i < n; i++)
@@ -779,6 +806,8 @@ ll power(ll int a, ll int b) {
 // bitset<32> b(n);
 // string s=b.to_string();
 // b.to_ullong()
+
+//a^b=c^d is equal to a^d=b^c
 ///------------------------------------------------------------------------------------------------///
 
 

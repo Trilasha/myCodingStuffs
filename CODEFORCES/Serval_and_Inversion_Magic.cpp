@@ -16,7 +16,7 @@ using namespace std;
 
 //typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
-
+           
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
@@ -32,7 +32,8 @@ using namespace std;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 #define sp(x)                 fixed<<setprecision(x)
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define mod                   1000000007
+#define md                    998244353
+#define modval                1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -69,37 +70,82 @@ TC--> nloglogn
 void google(ll t)             {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
-// v[i]=pow(10,v[i])+0.1; 
-// max 1e7 size vector can be created
-// vector<vector<int>> M;
-// M.resize(m, vector<int>(n));
-// binary_search(all(v),5)-->returns boolean value
-// iota(all(v),10); -- > o/p--> 10 11 12 13 14 15 16 17 18 19
-// a + b = a ^ b + 2 * (a & b)
-
-// bitset<32> b(n);
-// string s=b.to_string();
-// b.to_ullong()
-///------------------------------------------------------------------------------------------------///
 
 
 
+
+bool Is_Palindrome(string s){
+   ll n = s.size();
+  fr(i,n/2)
+{
+    if(s[i] != s[n-i-1]){
+         return false;
+      }
+}
+   return true;
+}
 
 
 void solve()
 {
-    ll n,a,b;
-    cin>>n>>a>>b;
+    ll n;
+    cin>>n;
+    string s;
+    cin>>s;
 
-    if(a>=n-1)
+    if(Is_Palindrome(s))
     {
-        cout<<"NO"<<endl;
+        cout<<"Yes"<<endl;
+        return;
+    }
+    ll i=0;
+    ll j=n-1;
+
+    ll ss=-1;
+    ll e=-1;
+    ll chk=0;
+
+    while(i<j)
+    {
+        if(s[i]==s[j] && chk==1)
+        {
+            ss=i;
+            e=j;
+            break;
+        }
+        if(s[i]!=s[j])
+        chk=1;
+        
+        i++;
+        j--;
+    }
+
+    if(ss==-1 && e==-1)
+    {
+        cout<<"Yes"<<endl;
         return;
     }
 
-    ll sum=a+b;
-    ll rem=(n-1)%sum;
-    cout<<((rem<=a)?"NO":"YES")<<endl;
+    i=ss+1;
+    j=e-1;
+
+    while(i<j)
+    {
+        if(s[i]!=s[j])
+        {
+            cout<<"No"<<endl;
+            return;
+        }
+        i++;
+        j--;
+    }
+
+    cout<<"Yes"<<endl;
+    return;
+
+
+
+
 }
 
 
@@ -116,3 +162,19 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

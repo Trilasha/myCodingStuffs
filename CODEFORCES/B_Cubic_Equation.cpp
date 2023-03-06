@@ -16,7 +16,7 @@ using namespace std;
 
 //typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
-
+           
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
@@ -30,8 +30,10 @@ using namespace std;
 #define pi                    pair<ll,ll> 
 #define maxpq                 priority_queue <ll> pq;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
+#define sp(x)                 fixed<<setprecision(x)
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define mod                   1000000007
+#define md                    998244353
+#define modval                1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -52,6 +54,9 @@ using namespace std;
 /// ------------------------------------NUMBER THEORY--------------------------------------------- ///
 vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
 ll phi(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
+ll bpow(int base,int power){int res=1;while(power){if(power&1){res *= base;power--;}else{base *= base;power /=2;}}return res;}
+ll expo(ll a, ll b, ll modd) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % modd; a = (a * a) % modd; b = b >> 1;} return res;}
+
 /*
 vector<ll> v= sieve(1e5+10);
 TC--> nloglogn
@@ -62,95 +67,33 @@ TC--> nloglogn
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 #define printset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
 #define line                  cout<<"----------------------------------------"<<endl;
-void google(ll t) {cout << "Case #" << t << ": ";}
+void google(ll t)             {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
-//  v[i]=pow(10,v[i])+0.1; 
-//max 1e7 size vector can be created
-///vector<vector<int>> M;
-//int m = number of rows, n = number of columns;
-//M.resize(m, vector<int>(n));
-//binary_search(all(v),5)-->returns boolean value
 
 
 
 
-bool check(ll mid,vector<ll> &v,ll k)
-{
-    ll req=0;
-    ll n=v.size();
-    for(ll i=n/2;i<n;++i)
-    {
-        if(v[i]<mid)
-        req+=mid-v[i];
-    }
-
-    if(req<=k)return 1;
-    return 0;
-}
 
 void solve()
 {
-    inp(n);
-    inp(k);
-    vector<ll> v(n);
-    inpv(v);
-
-    sort(all(v));
-
-    ll lo=0;
-    ll hi=2*1e9;
-    ll mid;
-    ll ans=0;
-
-    //to find the last truth value 
-    while(lo<=hi)
-    {
-        mid=(lo+hi)/2;
-        if(check(mid,v,k))
-        {
-            ans=mid;
-            lo=mid+1;
-        }
-        else
-            hi=mid-1;
-    }
-
-    cout<<ans<<endl;
-
-}
     
+}
+
+
 int main(){
 
 ios_base::sync_with_stdio(false);
 cin.tie(NULL);
-    
+
 ll q=1;
-//cin>>q;
+cin>>q;
 for(ll i=0;i<q;i++){
    // google(i+1);
     solve();
 }
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

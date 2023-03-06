@@ -16,7 +16,7 @@ using namespace std;
 
 //typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
-
+           
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
@@ -32,7 +32,8 @@ using namespace std;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 #define sp(x)                 fixed<<setprecision(x)
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define mod                   1000000007
+#define md                    998244353
+#define modval                1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -69,37 +70,72 @@ TC--> nloglogn
 void google(ll t)             {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
-// v[i]=pow(10,v[i])+0.1; 
-// max 1e7 size vector can be created
-// vector<vector<int>> M;
-// M.resize(m, vector<int>(n));
-// binary_search(all(v),5)-->returns boolean value
-// iota(all(v),10); -- > o/p--> 10 11 12 13 14 15 16 17 18 19
-// a + b = a ^ b + 2 * (a & b)
-
-// bitset<32> b(n);
-// string s=b.to_string();
-// b.to_ullong()
-///------------------------------------------------------------------------------------------------///
 
 
+
+
+ll req;
+double ans=0;
+
+void recur(string rec,ll n,string &temp,ll ind)
+{
+    if(temp.size()==n)
+    {
+       // cout<<temp<<endl;
+        ll sum=0;
+        fr(i,n)
+        sum+=(temp[i]=='+')?1:-1;
+
+        if(sum==req)
+        ans++;
+
+        return;
+    }
+
+    if(ind>=n)
+    return;
+
+    if(rec[ind]!='?')
+    {
+        temp+=rec[ind];
+        recur(rec,n,temp,ind+1);
+        temp.pop_back();
+    }
+    else 
+    {
+        temp+='+';
+        recur(rec,n,temp,ind+1);
+        temp.pop_back();
+        temp+='-';
+        recur(rec,n,temp,ind+1);
+        temp.pop_back();
+    }
+}
 
 
 
 void solve()
 {
-    ll n,a,b;
-    cin>>n>>a>>b;
+    string sent,rec;
+    cin>>sent>>rec;
+    
+    fr(i,sent.size())
+    req+=(sent[i]=='+')?1:-1;
 
-    if(a>=n-1)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
+    ll n=rec.size();
+    string temp="";
 
-    ll sum=a+b;
-    ll rem=(n-1)%sum;
-    cout<<((rem<=a)?"NO":"YES")<<endl;
+    ll ind=0;
+    recur(rec,n,temp,ind);
+
+
+    ll tot=1;
+    fr(i,n)
+    tot=(rec[i]=='?')?(tot*2):(tot*1);
+
+    //cout<<ans<<" "<<tot<<endl;
+
+    cout<<sp(9)<<(ans/tot)<<endl;
 }
 
 
@@ -109,10 +145,26 @@ ios_base::sync_with_stdio(false);
 cin.tie(NULL);
 
 ll q=1;
-cin>>q;
+//cin>>q;
 for(ll i=0;i<q;i++){
    // google(i+1);
     solve();
 }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

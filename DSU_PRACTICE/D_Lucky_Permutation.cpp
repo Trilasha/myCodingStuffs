@@ -16,7 +16,7 @@ using namespace std;
 
 //typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
 
-
+           
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
@@ -32,7 +32,8 @@ using namespace std;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
 #define sp(x)                 fixed<<setprecision(x)
 /// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define mod                   1000000007
+#define md                    998244353
+#define modval                1000000007
 #define PI                    3.141592653589793238
 #define bpl(n)                __builtin_popcountll(n);
 /// ------------------------------------TAKING INPUTS--------------------------------------------- ///
@@ -69,38 +70,81 @@ TC--> nloglogn
 void google(ll t)             {cout << "Case #" << t << ": ";}
 
 /// ---------------------------------------------------------------------------------------------- ///
-// v[i]=pow(10,v[i])+0.1; 
-// max 1e7 size vector can be created
-// vector<vector<int>> M;
-// M.resize(m, vector<int>(n));
-// binary_search(all(v),5)-->returns boolean value
-// iota(all(v),10); -- > o/p--> 10 11 12 13 14 15 16 17 18 19
-// a + b = a ^ b + 2 * (a & b)
-
-// bitset<32> b(n);
-// string s=b.to_string();
-// b.to_ullong()
-///------------------------------------------------------------------------------------------------///
 
 
 
 
 
+class DSU{
+    vector<ll> par,size;
+    
+public:
+    ll tot_components;
+    DSU(ll n)
+    {
+        size.resize(n+1,1);
+        par.resize(n+1);
+        for(ll i=1;i<=n;++i)
+        par[i]=i;
+ 
+        tot_components=n;
+    }
+ 
+ 
+    ll findPar(ll node)
+    {
+        if (node==par[node])
+        return node;
+        return par[node]=findPar(par[node]);
+    }
+ 
+    ll getsize(ll node){
+        return size[findPar(node)];
+    }
+ 
+    void unite(ll u,ll v)
+    {
+        ll ult_u=findPar(u);
+        ll ult_v=findPar(v);
+        if(ult_u==ult_v)return;
+        if(size[ult_u]<size[ult_v])
+        {
+            size[ult_v]+=size[ult_u];
+            par[ult_u]=ult_v;
+        }
+        else
+        {
+            size[ult_u]+=size[ult_v];
+            par[ult_v]=ult_u;
+        }
+        tot_components--;
+    }
+};
+ 
+ 
 void solve()
 {
-    ll n,a,b;
-    cin>>n>>a>>b;
-
-    if(a>=n-1)
-    {
-        cout<<"NO"<<endl;
-        return;
-    }
-
-    ll sum=a+b;
-    ll rem=(n-1)%sum;
-    cout<<((rem<=a)?"NO":"YES")<<endl;
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inpv(v);
+ 
+    DSU ds(n);
+ 
+    vector<ll> vis(n+1);
+    ll ok=0;
+ 
+    for(ll i=0;i<n;++i)
+       ds.unite(v[i],i+1);
+ 
+    for(ll i=1;i<n;++i)
+        if(ds.findPar(i)==ds.findPar(i+1))
+        ok=1;
+ 
+    cout<<((ok==1)?(n-(ds.tot_components)-1):(n-(ds.tot_components)+1))<<endl;
 }
+
+
 
 
 int main(){
@@ -116,3 +160,19 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
