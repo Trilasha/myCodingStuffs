@@ -75,7 +75,7 @@ void google(ll t)             {cout << "Case #" << t << ": ";}
 
 
 ll ask(ll x,ll y){
-    cout<<"? "<<x<<" "<<y<<"\n";
+    cout<<"? "<<x<<" "<<y<<endl;
     ll sum;
     cin>>sum;
     return sum;

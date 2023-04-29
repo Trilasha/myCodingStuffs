@@ -813,6 +813,12 @@ ll power(ll int a, ll int b) {
 
 
 
-
-
-
+ll base9(ll n) {
+    ll i = 1, res = 0, rem = 0;
+    while (n) {
+        rem = n % 9;
+        res += (rem * i);
+        n /= 9; i *= 10;
+    }
+    return res;
+}
