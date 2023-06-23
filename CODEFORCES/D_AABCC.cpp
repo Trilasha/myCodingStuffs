@@ -63,33 +63,27 @@ TC--> nloglogn
 
 
 
-bool isPrime(ll n)
-{
- if(n==1) return false;
-if(n==2 || n==3) return true;
-if(n%2==0 || n%3==0) return false;
-for(ll i=5;i*i<=n;i=i+6)
-if(n%i==0 || n%(i+2)==0)
-return false;
-return true;
-}
 
 
 void solve(){
-    vector<ll> sievee=sieve(200);
-    ll n;
-    cin>>n;
-    ll ans=0;
-    ll a=sievee.size();
-    for(ll i=2;i<a;++i){
-        for(ll j=i+1;j<a;++j){
-            for(ll k=j+1;k<a;++k){
-                if(((i*i)*j*(k*k))<=n)
-                ans++;
-            }
-        }
+   ll n;
+   cin>>n;
+   vector<ll> sievee=sieve(1e6);
+   //1e4 prime nos.
+   ll ans=0; 
+   for(ll i=0;i<sievee.size();++i){
+    for(ll j=i+1;j<sievee.size();++j){
+        ll val=sievee[i]*sievee[i]*sievee[j];
+        //line
+        if(val>=n)break;
+        ll ind=lower_bound(all(sievee),sqrtl(n/val))-sievee.begin();
+        while(sievee[ind]>sqrtl(n/val))--ind;
+        if(ind<=j)break;
+        //line
+        ans+=(ind-j);
     }
-    cout<<ans<<endl;
+   }
+   cout<<ans<<endl;
 }
 
 

@@ -1,0 +1,1 @@
+{"name":"Local: CannonBalls","url":"e:\\ALL_THE_CODES\\CODEFORCES\\DP_AtoK\\CannonBalls.cpp","tests":[{"id":1685959959925,"input":"5\n1\n5\n9\n15\n91","output":"1\n2\n3\n3\n2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ALL_THE_CODES\\CODEFORCES\\DP_AtoK\\CannonBalls.cpp","group":"local","local":true}

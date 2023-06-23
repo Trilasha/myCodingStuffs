@@ -30,7 +30,19 @@
 			"deque": "cpp",
 			"limits": "cpp",
 			"queue": "cpp",
-			"stack": "cpp"
-		}
+			"stack": "cpp",
+			"cstdlib": "cpp",
+			"exception": "cpp",
+			"fstream": "cpp",
+			"functional": "cpp",
+			"ios": "cpp",
+			"istream": "cpp",
+			"iterator": "cpp",
+			"memory": "cpp",
+			"streambuf": "cpp",
+			"tuple": "cpp",
+			"random": "cpp"
+		},
+		"cph.general.onceMaintainerMessage": false
 	}
 }

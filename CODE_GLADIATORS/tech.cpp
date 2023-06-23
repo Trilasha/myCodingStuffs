@@ -42,6 +42,7 @@ using namespace std;
 #define make(arr,n)           ll arr[n]; fr(i,n) cin>>arr[i];
 /// ------------------------------------FOR LOOPS AND SORT---------------------------------------- ///
 #define fr(i,n)               for (ll i=0;i<n;++i)
+#define rep(i,k,n)            for(ll i=k;i<n;++i)
 #define frs(i,k,n)            for(ll i=k;i<n;++i)
 #define fA(i,a,n)             for(ll i=a;i<=(n);++i)
 #define fD(i,a,n)             for(ll i=a;i>=(n);--i)
