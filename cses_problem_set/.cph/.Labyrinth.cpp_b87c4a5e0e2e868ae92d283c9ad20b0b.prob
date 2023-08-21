@@ -1,0 +1,1 @@
+{"name":"Local: Labyrinth","url":"e:\\ALL_THE_CODES\\cses_problem_set\\Labyrinth.cpp","tests":[{"id":1688149144911,"input":"5 8\n########\n#.A#...#\n#.##.#B#\n#......#\n########","output":"YES\n9\nLDDRRRRRU\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ALL_THE_CODES\\cses_problem_set\\Labyrinth.cpp","group":"local","local":true}

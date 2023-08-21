@@ -1,158 +1,86 @@
-/*
-Trilasha Mazumder
-2112063
+/* Trilasha Mazumder */
 
-<<<...The morning will come again...
-...no darkness, no season can last forever...>>>
-
-*/
-
-
-/// ------------------------------------HEADER-FILES and ABBREVIATIONS---------------------------- ///
 #include <bits/stdc++.h>
-
-//#include <ext/pb_ds/assoc_container.hpp>
-//#include <ext/pb_ds/tree_policy.hpp> 
-
-
 using namespace std;
-//using namespace __gnu_pbds;
-
-//typedef tree<long long, null_type, less<long long>, rb_tree_tag, tree_order_statistics_node_update> pbds; 
-
            
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
-#define popb                  pop_back
 #define lb                    lower_bound
 #define ub                    upper_bound
-#define umap                  unordered_map
-#define uset                  unordered_set
 #define ff                    first
 #define ss                    second
-#define pi                    pair<ll,ll> 
 #define maxpq                 priority_queue <ll> pq;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
-#define sp(x)                 fixed<<setprecision(x)
-/// ------------------------------------PRE-DEFINED VALUES---------------------------------------- ///
-#define md                    998244353
-#define modval                1000000007
-#define PI                    3.141592653589793238
-#define bpl(n)                __builtin_popcountll(n);
-/// ------------------------------------TAKING INPUTS--------------------------------------------- ///
-#define inp(n)                ll n;cin>>n;
 #define inpv(v)               for(auto &x: v) cin>>x;
-#define make(arr,n)           ll arr[n]; fr(i,n) cin>>arr[i];
-/// ------------------------------------FOR LOOPS AND SORT---------------------------------------- ///
 #define fr(i,n)               for (ll i=0;i<n;++i)
-#define frs(i,k,n)            for(ll i=k;i<n;++i)
-#define fA(i,a,n)             for(ll i=a;i<=(n);++i)
-#define fD(i,a,n)             for(ll i=a;i>=(n);--i)
-#define dsort(arr)            sort(arr,arr+n,greater<ll>())
-#define asort(arr)            sort(arr,arr+n)
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
-
-
-/// ------------------------------------NUMBER THEORY--------------------------------------------- ///
-vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
-ll phi(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
-ll bpow(ll base,ll power){ll res=1;while(power){if(power&1){res *= base;power--;}else{base *= base;power /=2;}}return res;}
-ll expo(ll a, ll b, ll modd) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % modd; a = (a * a) % modd; b = b >> 1;} return res;}
-
-/*
-vector<ll> v= sieve(1e5+10);
-TC--> nloglogn
-*/
-
-/// ------------------------------------PRINTOUTS------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 #define printset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
 #define line                  cout<<"----------------------------------------"<<endl;
-void google(ll t)             {cout << "Case #" << t << ": ";}
+#define arrow                 cout<<"--->";
+#define debugmap(mp)          for(auto &i: mp){cout << i.ff << "-->" << i.ss <<endl;} cout << endl;
+#define debugset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
+#define fast_io               ios_base::sync_with_stdio(false);cin.tie(NULL);
+#define sp(x)                 fixed<<setprecision(x)
+#define PI                    3.141592653589793238
+#define bpl(n)                __builtin_popcountll(n);
+#define md                    998244353
+#define modval                1000000007
+//#define endl                " \n"
+/*----------------------------------------------------------------------------------------------------------- */
 
-/// ---------------------------------------------------------------------------------------------- ///
-//reference for sequence(NT) --> oeis.org
 
+//floyd warshall algorithm --> O(n^3)
+ll n,m,q;
+vector<vector<ll>> matrix;
 
-
-
-
-
-// public:
-	void shortest_distance(vector<vector<ll>> &matrix){
-	    ll n=matrix.size();
-	    
-	    //assigning 1e9 to the ones with no edges for our ease
-	    for(int i=1;i<n;++i)
-	    {
-	        for(int j=1;j<n;++j)
-	        {
+void shortest_distance(vector<vector<ll>> &matrix){
+	    for(int i=1;i<=n;++i){
+	        for(int j=1;j<=n;++j){
 	            if(matrix[i][j]==-1)
 	            matrix[i][j]=1e18;
 	        }
 	    }
 	    
-	    
-	    for(int val=1;val<n;++val)
-	    {
-	       for(int i=1;i<n;++i)
-	       {
-	           for(int j=1;j<n;++j)
-	           {
+	    for(int val=1;val<=n;++val){
+	       for(int i=1;i<=n;++i){
+	           for(int j=1;j<=n;++j){
 	               matrix[i][j]=min(matrix[i][j],matrix[i][val]+matrix[val][j]);
 	           }
 	       }
 	    }
-	    
-	    
-	    // //checking for the existence of negative cycle
-	    // for(int i=0;i<n;++i)
-	    // {
-	    //     if(matrix[i][i]<0)
-	    //     {
-	    //     //then give the condition
-	    //     }
-	    // }
-	    
-	    //do not forget to reverse our assumption
-	      for(int i=1;i<n;++i)
-	    {
-	        for(int j=1;j<n;++j)
-	        {
-	            if(matrix[i][j]==1e18)
-	            matrix[i][j]=-1;
-	        }
+	    for(int i=1;i<=n;++i){
+            for(int j=1;j<=n;++j){
+                if(matrix[i][j]==1e18)
+                matrix[i][j]=-1;
+            }
 	    }
 	}
-
-void solve()
-{
-    ll n,m,q;
-    cin>>n>>m>>q;
-    vector<vector<ll>> matrix(n+1,vector<ll>(n+1,-1));
-    fr(i,m)
-    {
-        ll x,y,w;
-        cin>>x>>y>>w;
-        if(matrix[x][y]!=-1)
-        {
-            matrix[x][y]=min(matrix[x][y],w);
-            matrix[y][x]=min(matrix[y][x],w);
-        }
-        else
-        {
-            matrix[x][y]=w;
-            matrix[y][x]=w;
-        }
+ 
+void solve(){
+  cin>>n>>m>>q;
+  matrix.resize(n+1,vector<ll>(n+1,-1));
+  fr(i,m){
+    ll x,y,z;
+    cin>>x>>y>>z;
+    if(matrix[x][y]==-1){
+        matrix[x][y]=z;
+        matrix[y][x]=z;
     }
-    shortest_distance(matrix);
-    fr(i,q)
-    {
+    else{
+        matrix[x][y]=min(matrix[x][y],z);
+        matrix[y][x]=min(matrix[y][x],z);
+    }
+  }
+  shortest_distance(matrix);
+    fr(i,q){
         ll x,y;
         cin>>x>>y;
+        if(x==y)cout<<0<<endl;
+        else
         cout<<matrix[x][y]<<endl;
     }
 }
@@ -160,13 +88,11 @@ void solve()
 
 int main(){
 
-ios_base::sync_with_stdio(false);
-cin.tie(NULL);
+fast_io;
 
 ll q=1;
 //cin>>q;
 for(ll i=0;i<q;i++){
-   // google(i+1);
     solve();
 }
     return 0;
@@ -177,13 +103,19 @@ for(ll i=0;i<q;i++){
 
 
 
+/*----------------------------------------------------------------------------------------------------------- */
+// clear adj and visited vector declared globally after each test case 
+// if input newly taken then use 'resize' or else 'assign' (for dp and graphs)
+//    BINARY SEARCH ~ 2-PNTS ~ DP 
+//    reference for sequence(NT) --> oeis.org
+//    log2(x)
+//    set.lower_bound(x)
+//    for mod division --> a/b use a*inverse(b) (don't divide simply)
+//    set<ll> adj[n+1]; --> for adjacency list (to handle erasing of elements)
+//    gcd(x,y)=gcd(x-y,y) --->  gcd(x,y,z,...)=gcd(x-y,y,z,...)
+//    if nlogn approach gives tle, go for O(n) don't sit idle (for lb/ub replace set with vector)
+/*----------------------------------------------------------------------------------------------------------- */
 
 
 
-
-
-
-
-
-
-
+   

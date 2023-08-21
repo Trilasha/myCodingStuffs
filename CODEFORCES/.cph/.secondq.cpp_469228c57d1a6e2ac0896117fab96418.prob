@@ -1,0 +1,1 @@
+{"name":"Local: secondq","url":"e:\\ALL_THE_CODES\\CODEFORCES\\secondq.cpp","tests":[{"id":1689602634178,"input":"14\n3 12 15 23 5 18 7 11 13 -1 16 14 -1 -1 19 17","output":"49"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ALL_THE_CODES\\CODEFORCES\\secondq.cpp","group":"local","local":true}

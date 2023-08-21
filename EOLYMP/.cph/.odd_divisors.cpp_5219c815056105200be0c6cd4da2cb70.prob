@@ -1,0 +1,1 @@
+{"name":"Local: odd_divisors","url":"e:\\ALL_THE_CODES\\EOLYMP\\odd_divisors.cpp","tests":[{"id":1691818629311,"input":"7\n1\n777","output":"21\n1\n201537"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ALL_THE_CODES\\EOLYMP\\odd_divisors.cpp","group":"local","local":true}

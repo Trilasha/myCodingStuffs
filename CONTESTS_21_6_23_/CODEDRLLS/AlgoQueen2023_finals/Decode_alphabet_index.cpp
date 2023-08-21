@@ -29,34 +29,60 @@ using namespace std;
 #define bpl(n)                __builtin_popcountll(n);
 #define md                    998244353
 #define modval                1000000007
-// define endl                " \n"
+//#define endl                " \n"
+
+
+/*----------------------------------------------------------------------------------------------------------- */
+//clear adj and visited vector declared globally after each test case 
+//if input newly taken then use 'resize' or else 'assign' (for dp and graphs)
+//    BINARY SEARCH ~ 2-PNTS ~ DP 
+//    reference for sequence(NT) --> oeis.org
+//    log2(x)
+//    set.lower_bound(x)
+//    for mod division --> a/b use a*inverse(b) (don't divide simply)
+//    set<ll> adj[n+1]; --> for adjacency list (to handle erasing of elements)
+//    gcd(x,y)=gcd(x-y,y) --->  gcd(x,y,z,...)=gcd(x-y,y,z,...)
+//    a+b=2⋅(a&b)+a⊕bs
+//    a⊕b=¬(a&b)&(a∣b)
 /*----------------------------------------------------------------------------------------------------------- */
 
+vector<string> ans;
+string s;
+ll n;
 
 
-
-
-set<ll> st;ll n;
-vector<ll> v;
-vector<vector<ll>> dp(101,vector<ll>(1e5+5,-1));
-
-
-ll recur(ll ind,ll sum){
-    if(ind>=n)return 0;
-    if(dp[ind][sum]!=-1)return dp[ind][sum];
-    st.insert(sum);
-    return dp[ind][sum]=recur(ind+1,sum)+recur(ind+1,sum+v[ind]);
+void recur(ll ind,string &temp){
+    if(ind>=n){
+        //cout<<temp<<endl;
+        ans.pb(temp);
+        return;
+    }
+    ll val=s[ind]-'0';
+    temp.pb(char('A'+val-1));
+    recur(ind+1,temp);
+    temp.pop_back();
+    if(ind<n-1){
+        val*=10;
+        val+=s[ind+1]-'0';
+        if(val<=26){
+            temp.pb(char('A'+val-1));
+            recur(ind+2,temp);
+            temp.pop_back();
+        }
+    }
 }
 
+
 void solve(){
-    cin>>n;
-    v.resize(n);
-    inpv(v);
-    sort(all(v));
-    recur(0,0);
-    cout<<st.size()<<endl;
-    for(auto &i: st)cout<<i<<" ";
-    cout<<endl;
+    cin>>s;
+    n=s.size();
+    string temp="";
+
+    recur(0,temp);
+    //sort(all(ans));
+    for(auto &x: ans){
+        cout<<x<<endl;
+    }
 }
 
 
@@ -77,18 +103,4 @@ for(ll i=0;i<q;i++){
 
 
 
-
-
-
-
-
-/*--------------------------------------------------------------------------------------------------------- 
-   reference for sequence(NT) --> oeis.org
-   log2(x)
-   set.lower_bound(x)
-   for mod division --> a/b use a*inverse(b) (don't divide simply)
-   set<ll> adj[n+1]; --> for adjacency list (to handle erasing of elements)
-   gcd(x,y)=gcd(x-y,y) --->  gcd(x,y,z,...)=gcd(x-y,y,z,...)
-   a+b=2⋅(a&b)+a⊕b
-   a⊕b=¬(a&b)&(a∣b)
-   --------------------------------------------------------------------------------------------------------- */
+   

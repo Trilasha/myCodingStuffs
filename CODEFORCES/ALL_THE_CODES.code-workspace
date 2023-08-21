@@ -1,9 +1,11 @@
 {
 	"folders": [
 		{
+			"name": "CODEFORCES",
 			"path": "."
 		},
 		{
+			"name": "ALL_THE_CODES",
 			"path": ".."
 		}
 	],
@@ -41,7 +43,8 @@
 			"memory": "cpp",
 			"streambuf": "cpp",
 			"tuple": "cpp",
-			"random": "cpp"
+			"random": "cpp",
+			"iostream": "cpp"
 		},
 		"cph.general.onceMaintainerMessage": false
 	}
