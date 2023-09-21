@@ -2,7 +2,7 @@
 //divide and conquer approach (recursion) --> tc(n*m*logm*logn)
 
 bool recur(vector<string>&v){
-    debug(v);
+    // debug(v);
     map<string,vector<string>>mp;
     ll sz=v[0].size();
     if(sz==1){

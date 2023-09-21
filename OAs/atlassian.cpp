@@ -80,6 +80,8 @@ void solve(){
         cout<<ans[i]<<" ";
     }
     cout<<endl;
+
+    unique(v.b)
 }
 
 int main(){

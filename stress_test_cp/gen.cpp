@@ -86,13 +86,9 @@ void tree(int n) {
 }
 signed main()
 {
-    int n=rand(2,10);
-    int m=rand(1,10);
-    cout<<n<<" "<<m<<endl;
-    for(int i=2;i<=n;++i){
-        cout<<rand(1,i-1)<<" ";
+    int n=rand(1,1e6);
+    cout<<n<<endl;
+    for(int i=0;i<n;++i){
+        cout<<rand(1,1e6)<<" ";
     }cout<<endl;
-    for(int i=0;i<m;++i){
-        cout<<rand(1,n)<<" "<<rand(1,10)<<endl;
-    }
 }

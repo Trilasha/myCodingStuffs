@@ -36,6 +36,7 @@ using namespace std;
  
 vector<vector<ll>> adj,adjRev;
 vector<ll> vis,order,ans;
+
 void dfs(ll node,ll pass,ll component){
     vis[node]=1;
     vector<ll> newAdj=((!pass)?adj[node]:adjRev[node]);

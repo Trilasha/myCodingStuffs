@@ -1,87 +1,87 @@
-/* Trilasha Mazumder */
-
 #include <bits/stdc++.h>
 using namespace std;
            
 #define ll                    long long
 #define ld                    long double
 #define pb                    push_back
+#define popb                  pop_back
 #define lb                    lower_bound
 #define ub                    upper_bound
 #define ff                    first
 #define ss                    second
 #define maxpq                 priority_queue <ll> pq;
 #define minpq                 priority_queue <ll, vector<ll>, greater<ll> > pq; 
+#define sp(x)                 fixed<<setprecision(x)
+/// ---------------------------------------------------------------------------------------------------------- ///
+#define md                    998244353
+#define modval                1000000007
+#define PI                    3.141592653589793238
+#define bpl(n)                __builtin_popcountll(n);
+/// ---------------------------------------------------------------------------------------------------------- ///
+#define inp(n)                ll n;cin>>n;
 #define inpv(v)               for(auto &x: v) cin>>x;
+#define make(arr,n)           ll arr[n]; fr(i,n) cin>>arr[i];
+/// ---------------------------------------------------------------------------------------------------------- ///
 #define fr(i,n)               for (ll i=0;i<n;++i)
+#define frs(i,k,n)            for(ll i=k;i<n;++i)
 #define all(str)              str.begin(), str.end()
 #define pll                   pair<ll,ll>
+
+/// ------------------------------------NUMBER THEORY-------------------------------------------------------- ///
+vector<ll> sieve(int n) {int*arr = new int[n + 1](); vector<ll> vect; for (int i = 2; i <= n; i++)if (arr[i] == 0) {vect.push_back(i); for (int j = 2 * i; j <= n; j += i)arr[j] = 1;} return vect;}
+ll phi(ll n) {ll number = n; if (n % 2 == 0) {number /= 2; while (n % 2 == 0) n /= 2;} for (ll i = 3; i <= sqrt(n); i += 2) {if (n % i == 0) {while (n % i == 0)n /= i; number = (number / i * (i - 1));}} if (n > 1)number = (number / n * (n - 1)) ; return number;} //O(sqrt(N))
+ll bpow(ll base,ll power){ll res=1;while(power){if(power&1){res *= base;power--;}else{base *= base;power /=2;}}return res;}
+ll expo(ll a, ll b, ll modd) {ll res = 1; while (b > 0) {if (b & 1)res = (res * a) % modd; a = (a * a) % modd; b = b >> 1;} return res;}
+
+/// --------------------------------------------------------------------------------------------------------- ///
 #define printv(v)             for(auto &i: v){cout << i << " ";} cout << endl;
 #define printmap(mp)          for(auto &i: mp){cout << i.first << " "<<i.second<<endl;}
 #define printset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
 #define line                  cout<<"----------------------------------------"<<endl;
 #define arrow                 cout<<"--->";
-#define debugmap(mp)          for(auto &i: mp){cout << i.ff << "-->" << i.ss <<endl;} cout << endl;
-#define debugset(st)          for(auto &i: st){cout << i << " ";} cout << endl;
+#define debugmap(mp)             for(auto &i: mp){cout << i.ff << "-->" << i.ss <<endl;} cout << endl;
+#define debugset(st)             for(auto &i: st){cout << i << " ";} cout << endl;
 #define fast_io               ios_base::sync_with_stdio(false);cin.tie(NULL);
-#define sp(x)                 fixed<<setprecision(x)
-#define PI                    3.141592653589793238
-#define bpl(n)                __builtin_popcountll(n);
-#define md                    998244353
-#define modval                1000000007
-//#define endl                " \n"
-/*----------------------------------------------------------------------------------------------------------- */
+
+/// --------------------------------------------------------------------------------------------------------- ///
 
 
 
+// 1 1 3 1 4 1 1 4 1 1 0 1 1 1 
 void solve(){
-  ll n,m;
-  cin>>n>>m;
-  vector<ll> v(n-1);
-  inpv(v);
-  vector<vector<ll>> adj(n+1);
-    for(ll i=0;i<n-1;i++){
-        //adj[i+2].pb(v[i]);
-        adj[v[i]].pb(i+2);
+    vector<ll> sievee=sieve(1e6);
+    ll n;
+    cin>>n;
+    vector<ll> v(n);
+    inpv(v);
+    vector<ll> cnt(n);
+    ll ind=n;
+    for(ll i=n-1;i>=0;--i){
+        if(v[i]==1)
+        cnt[i]=ind;
+        else{
+        cnt[i]=i;
+        ind=i;
+        }
     }
-    vector<ll> dis(n+1,0);
-    priority_queue<pll> pq;
-    set<ll> st;
-    map<ll,ll> mp;
-
-    fr(i,m){
-        ll x,y;
-        cin>>x>>y;
-        mp[x]=max(mp[x],y+1);
-    }
-
-    //vector<ll> vis(n+1,0);
-
-    for(auto i: mp){
-        dis[i.ff]=i.ss;
-        st.insert(i.ff);
-        pq.push({i.ss,i.ff});
-        // vis[i.ff]=1;
-    }
-
-    while(!pq.empty()){
-        ll node=pq.top().ss;
-        ll dist=pq.top().ff;
-        pq.pop();
-        if(dist<dis[node] || dist<=0)continue;
-        for(auto i: adj[node]){
-            if(dis[i]<dist-1){
-                dis[i]=dist-1;
-                st.insert(i);
-                pq.push({dis[i],i});
+    ll ans=0;
+    for(ll i=0;i<n;++i){
+        if(v[i]==1){
+            ll mx=cnt[i]-i;
+            ll ind=lower_bound(all(sievee),mx)-sievee.begin();
+            if(ind==sievee.size()){
+                ans+=sievee.size();
+            }else{
+                if(sievee[ind]==mx){
+                    ans+=ind+1;
+                }else{
+                    ans+=ind;
+                }
             }
         }
     }
 
-    for(ll i=1;i<=n;++i){
-        if(dis[i]>0)st.insert(i);
-    }
-    cout<<st.size()<<endl;
+    cout<<ans<<endl;
 }
 
 
@@ -96,25 +96,3 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
-
-
-
-
-
-
-/*----------------------------------------------------------------------------------------------------------- */
-// clear adj and visited vector declared globally after each test case 
-// if input newly taken then use 'resize' or else 'assign' (for dp and graphs)
-//    BINARY SEARCH ~ 2-PNTS ~ DP 
-//    reference for sequence(NT) --> oeis.org
-//    log2(x)
-//    set.lower_bound(x)
-//    for mod division --> a/b use a*inverse(b) (don't divide simply)
-//    set<ll> adj[n+1]; --> for adjacency list (to handle erasing of elements)
-//    gcd(x,y)=gcd(x-y,y) --->  gcd(x,y,z,...)=gcd(x-y,y,z,...)
-//    if nlogn approach gives tle, go for O(n) don't sit idle (for lb/ub replace set with vector)
-/*----------------------------------------------------------------------------------------------------------- */
-
-
-
-   

@@ -1,0 +1,1 @@
+{"name":"Local: try","url":"e:\\ALL_THE_CODES\\GOCS\\swe\\try.cpp","tests":[{"id":1693338106507,"input":"6\n1 2 1 3 4 3\n3","output":"2 3 3 2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"e:\\ALL_THE_CODES\\GOCS\\swe\\try.cpp","group":"local","local":true}

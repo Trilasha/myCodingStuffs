@@ -48,16 +48,17 @@ using namespace std;
 
 
 
-struct node{
-    int x,y;
-    int cnt=0;
-};
+// struct node{
+//     int x,y;
+//     int cnt=0;
+// };
+#define node vector<int>
 
 void solve(){
   int n,m;
   cin>>n>>m;
   vector<vector<char>> v(n,vector<char>(m));
-  queue<node> q;
+  priority_queue<node,vector<node>,greater<node>> q;
   int start_x,start_y;
   int bx,by;
 
@@ -67,7 +68,7 @@ void solve(){
         if(v[i][j]=='A'){
             start_x=i;
             start_y=j;
-            q.push({i,j,0});
+            q.push({0,i,j});
         }
         if(v[i][j]=='B'){
             bx=i;
@@ -82,32 +83,33 @@ void solve(){
   vector<vector<int>> dp(n,vector<int>(m,INT_MAX)),vis(n,vector<int>(m,0));
 
   while(!q.empty()){
-    auto it=q.front();
+    auto it=q.top();
     q.pop();
-    int x=it.x;
-    int y=it.y;
-    int cnt=it.cnt;
+    int x=it[1];
+    int y=it[2];
+    int cnt=it[0];
+    if(dp[x][y]<cnt)continue;
 
-    dp[x][y]=min(dp[x][y],cnt);
+    dp[x][y]=cnt;
     if(v[x][y]=='B'){
             ans=cnt;
             break;
     }
 
-    if(vis[x][y]) continue;
-    vis[x][y]=1;
+    // if(vis[x][y]) continue;
+    // vis[x][y]=1;
 
-    if(x+1<n && v[x+1][y]!='#'){
-        q.push({x+1,y,cnt+1});
+    if(x+1<n && v[x+1][y]!='#' && dp[x+1][y]>cnt+1){
+        q.push({cnt+1,x+1,y});
     }
-    if(x-1>=0 && v[x-1][y]!='#'){
-        q.push({x-1,y,cnt+1});
+    if(x-1>=0 && v[x-1][y]!='#' && dp[x-1][y]>cnt+1){
+        q.push({cnt+1,x-1,y});
     }
-    if(y+1<m && v[x][y+1]!='#'){
-        q.push({x,y+1,cnt+1});
+    if(y+1<m && v[x][y+1]!='#' && dp[x][y+1]>cnt+1){
+        q.push({cnt+1,x,y+1});
     }
-    if(y-1>=0 && v[x][y-1]!='#'){
-        q.push({x,y-1,cnt+1});
+    if(y-1>=0 && v[x][y-1]!='#' && dp[x][y-1]>cnt+1){
+        q.push({cnt+1,x,y-1});
     }
   }
 

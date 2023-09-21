@@ -44,12 +44,15 @@ vector<ll> dijkstra(vector<vector<pair<ll,ll>>> &adj,int n)
  
     dis[1] = 0;
     pq.push({0, 1});
+    // vector<int> vis(n+1);
  
     while (!pq.empty())
     {
         ll distance = pq.top().first;
         ll node = pq.top().second;
         pq.pop();
+        // if(vis[node])continue;
+        // vis[node]=1;
  
         for (auto &i : adj[node])
         {
