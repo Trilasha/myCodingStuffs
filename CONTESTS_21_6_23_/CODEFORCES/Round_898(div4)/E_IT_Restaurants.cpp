@@ -38,58 +38,80 @@ using namespace std;
 
 
 
-void dfs(ll node,ll par,ll time,vector<vector<ll>> &adj,vector<ll> &vis,ll &Vtime,ll &Vnode,vector<ll> &dp){
-    vis[node]=1;
-    dp[node]=time;
-    for(auto child: adj[node]){
-        if(vis[child] && child!=par && Vtime==-1){
-            //cout<<child<<" "<<node<<endl;
-            Vnode=child;
-            Vtime=dp[child];
+ll dfs(ll node,ll par,vector<vector<ll>> &adj,vector<ll> &dp){
+    ll ans=1;
+    for(auto &i:adj[node]){
+        if(i!=par){
+            ans+=dfs(i,node,adj,dp);
         }
-        if(!vis[child]){
-            dfs(child,node,time+1,adj,vis,Vtime,Vnode,dp);
+    }
+    return dp[node]=ans;
+}
+void dfs2(ll node,ll par,ll n,vector<vector<ll>> &adj,vector<ll> &dp,set<pll> &vp){
+    ll sum=0;
+    //cout<<node<<endl;
+    for(auto &i:adj[node]){
+        if(i!=par){
+            if(node!=1){
+                vp.insert({dp[i],n-dp[i]-1});
+                vp.insert({n-dp[i]-1,dp[i]});
+            }
+            if(adj[node].size()>1 && sum>0){
+                vp.insert({sum,n-sum-1});
+                vp.insert({n-sum-1,sum});
+            }
+            // cout<<vp.size()<<endl;
+            sum+=dp[i];
+            dfs2(i,node,n,adj,dp,vp);
         }
+    }
+    if(node!=1 && adj[node].size()>1 && sum>0){
+        vp.insert({sum,n-sum-1});
+        vp.insert({n-sum-1,sum});
     }
 }
-void dfs2(ll node,ll par,ll time,vector<vector<ll>> &adj,vector<ll> &vis,ll &Mtime,ll Vnode){
-    vis[node]=1;
-    if(node==Vnode){
-        // cout<<time<<endl;
-        Mtime=time;
-    }
-    for(auto child: adj[node]){
-        if(!vis[child]){
-            dfs2(child,node,time+1,adj,vis,Mtime,Vnode);
+void dfs3(ll node,ll par,ll n,vector<vector<ll>> &adj,vector<ll> &dp,set<pll> &vp){
+    ll sum=0;
+    for(ll i=adj[node].size()-1;i>=0;--i){
+        ll child=adj[node][i];
+        if(child!=par){
+            if(node!=1){
+                vp.insert({dp[child],n-dp[child]-1});
+                vp.insert({n-dp[child]-1,dp[child]});
+            }
+            if(adj[node].size()>1 && sum>0){
+                vp.insert({sum,n-sum-1});
+                vp.insert({n-sum-1,sum});
+            }
+            sum+=dp[child];
+            dfs3(child,node,n,adj,dp,vp);
         }
+    }
+    if(node!=1 && adj[node].size()>1 && sum>0){
+        vp.insert({sum,n-sum-1});
+        vp.insert({n-sum-1,sum});
     }
 }
 void solve(){
-    ll n,M,V;
-    cin>>n>>M>>V;
+    ll n;
+    cin>>n;
     vector<vector<ll>> adj(n+1);
-    fr(i,n){
+    vector<ll>dp(n+1);
+    fr(i,n-1){
         ll x,y;
         cin>>x>>y;
         adj[x].pb(y);
         adj[y].pb(x);
     }
-    ll Vnode=-1,Mtime=-1,Vtime=-1;
-    vector<ll> vis(n+1,0);
-    vector<ll> dp(n+1);
-    dfs(V,0,0,adj,vis,Vtime,Vnode,dp);
-    vis.clear();
-    vis.assign(n+1,0);
-    //cout<<Vnode<<" "<<Vtime<<endl;
-    dfs2(M,0,0,adj,vis,Mtime,Vnode);
-    //cout<<Mtime<<endl;
-    if(M==V){
-        cout<<"NO"<<endl;
-        return;
+    dfs(1,0,adj,dp);
+    // printv(dp);
+    set<pll> vp;
+    dfs2(1,0,n,adj,dp,vp);
+    dfs3(1,0,n,adj,dp,vp);
+    cout<<vp.size()<<endl;
+    for(auto &i:vp){
+        cout<<i.ff<<" "<<i.ss<<endl;
     }
-    //cout<<Vtime<<" "<<Mtime<<endl;
-
-    cout<<((Vtime<Mtime)?"YES":"NO")<<endl;
 }
 
 
@@ -98,7 +120,7 @@ int main(){
 fast_io;
 
 ll q=1;
-cin>>q;
+// cin>>q;
 for(ll i=0;i<q;i++){
     solve();
 }

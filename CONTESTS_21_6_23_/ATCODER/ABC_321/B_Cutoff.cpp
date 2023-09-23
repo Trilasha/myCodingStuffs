@@ -38,58 +38,36 @@ using namespace std;
 
 
 
-void dfs(ll node,ll par,ll time,vector<vector<ll>> &adj,vector<ll> &vis,ll &Vtime,ll &Vnode,vector<ll> &dp){
-    vis[node]=1;
-    dp[node]=time;
-    for(auto child: adj[node]){
-        if(vis[child] && child!=par && Vtime==-1){
-            //cout<<child<<" "<<node<<endl;
-            Vnode=child;
-            Vtime=dp[child];
-        }
-        if(!vis[child]){
-            dfs(child,node,time+1,adj,vis,Vtime,Vnode,dp);
-        }
-    }
-}
-void dfs2(ll node,ll par,ll time,vector<vector<ll>> &adj,vector<ll> &vis,ll &Mtime,ll Vnode){
-    vis[node]=1;
-    if(node==Vnode){
-        // cout<<time<<endl;
-        Mtime=time;
-    }
-    for(auto child: adj[node]){
-        if(!vis[child]){
-            dfs2(child,node,time+1,adj,vis,Mtime,Vnode);
-        }
-    }
-}
-void solve(){
-    ll n,M,V;
-    cin>>n>>M>>V;
-    vector<vector<ll>> adj(n+1);
-    fr(i,n){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    ll Vnode=-1,Mtime=-1,Vtime=-1;
-    vector<ll> vis(n+1,0);
-    vector<ll> dp(n+1);
-    dfs(V,0,0,adj,vis,Vtime,Vnode,dp);
-    vis.clear();
-    vis.assign(n+1,0);
-    //cout<<Vnode<<" "<<Vtime<<endl;
-    dfs2(M,0,0,adj,vis,Mtime,Vnode);
-    //cout<<Mtime<<endl;
-    if(M==V){
-        cout<<"NO"<<endl;
-        return;
-    }
-    //cout<<Vtime<<" "<<Mtime<<endl;
 
-    cout<<((Vtime<Mtime)?"YES":"NO")<<endl;
+void solve(){
+    ll n,X;
+    cin>>n>>X;
+    vector<ll> v(n-1);
+    inpv(v);
+
+    auto check=[&](ll mid)->bool{
+        vector<ll> temp=v;
+        temp.pb(mid);
+        sort(all(temp));
+        ll sum=accumulate(all(temp),0ll);
+        sum-=temp[0];
+        sum-=temp.back();
+        return sum>=X;
+    };
+
+    ll low=0;
+    ll high=100;
+    ll ans=-1;
+    while(low<=high){
+        ll mid=(low+high)/2;
+        if(check(mid)){
+            ans=mid;
+            high=mid-1;
+        }else{
+            low=mid+1;
+        }
+    }
+    cout<<ans<<endl;
 }
 
 
@@ -98,7 +76,7 @@ int main(){
 fast_io;
 
 ll q=1;
-cin>>q;
+// cin>>q;
 for(ll i=0;i<q;i++){
     solve();
 }
