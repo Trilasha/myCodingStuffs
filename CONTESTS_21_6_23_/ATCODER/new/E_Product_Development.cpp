@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,39 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
-    }
-
-    out[node]=timer++;
-}
-
-void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
-    }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
-    }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
+ll recur(ll ind,vector<ll> temp,ll m,ll P,vector<vector<ll>> &v,map<ll,map<vector<ll>,ll>> &dp){
+    if(ind==v.size()){
+        for(ll i=0;i<m;++i){
+            if(temp[i]<P) return 1e16;
         }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
+        return 0;
     }
-
+    if(dp[ind].count(temp)) return dp[ind][temp];
+    ll ans=recur(ind+1,temp,m,P,v,dp);
+    vector<ll> Temp=temp;
+    for(ll i=0;i<m;++i){
+        Temp[i]+=v[ind][i+1];
+        Temp[i]=min(Temp[i],P);
+    }
+    // printv(temp);
+    ans=min(ans,v[ind][0]+recur(ind+1,Temp,m,P,v,dp));
+    return dp[ind][temp]=ans;
+}
+void solve(){
+    ll n,m,P;
+    cin>>n>>m>>P;
+    vector<vector<ll>> v(n,vector<ll>(m+1));
+    for(ll i=0;i<n;++i){
+        for(ll j=0;j<=m;++j){
+            cin>>v[i][j];
+        }
+    }
+    map<ll,map<vector<ll>,ll>> dp;
+    vector<ll> temp(m);
+    ll ans=recur(0,temp,m,P,v,dp);
+    cout<<((ans==1e16)?-1:ans)<<endl;
 }
 
 
@@ -104,13 +75,10 @@ int main(){
 fast_io;
 
 ll q=1;
-cin>>q;
+// cin>>q;
 for(ll i=0;i<q;i++){
     solve();
 }
     return 0;
 }
-
-
-
 

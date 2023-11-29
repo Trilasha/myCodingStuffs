@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,76 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
+
+class DSU{
+    vector<ll> par,size;
+public:
+    ll tot_components;
+    DSU(ll n){
+        size.resize(n+1,1);
+        par.resize(n+1);
+        for(ll i=1;i<=n;++i)
+        par[i]=i;
+        tot_components=n;
     }
-
-    out[node]=timer++;
-}
+    ll findPar(ll node){
+        if (node==par[node])
+        return node;
+        return par[node]=findPar(par[node]);
+    }
+    ll getsize(ll node){
+        return size[findPar(node)];
+    }
+    void unite(ll u,ll v){
+        ll ult_u=findPar(u);
+        ll ult_v=findPar(v);
+        if(ult_u==ult_v)return;
+        if(size[ult_u]<size[ult_v]){
+            size[ult_v]+=size[ult_u];
+            par[ult_u]=ult_v;
+        }else{
+            size[ult_u]+=size[ult_v];
+            par[ult_v]=ult_u;
+        }
+        tot_components--;
+    }
+};
+ 
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
-    }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
-    }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
-        }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
-    }
-
+ ll n,m,k;
+ cin>>n>>m>>k;
+ DSU ds(n);
+ for(ll i=0;i<m;++i){
+    ll x,y;
+    cin>>x>>y;
+    ds.unite(x,y);
+ }
+ set<ll> st;
+ vector<ll> v;
+ for(ll i=1;i<=n;++i){
+    st.insert(ds.findPar(i));
+ }
+//  printset(st);
+ for(auto &i:st){
+    v.pb(ds.getsize(i));
+ }
+ sort(all(v),greater<ll>());
+ ll ans=v[0];
+ if((v.size()-1)<=k){
+    cout<<n<<endl;
+    return;
+ }
+//  printv(v);
+ ll ind=1;
+ while(k){
+    ans+=v[ind];
+    ind++;
+    k--;
+ }
+ cout<<ans<<endl;
 }
 
 
@@ -104,13 +112,10 @@ int main(){
 fast_io;
 
 ll q=1;
-cin>>q;
+// cin>>q;
 for(ll i=0;i<q;i++){
     solve();
 }
     return 0;
 }
-
-
-
 

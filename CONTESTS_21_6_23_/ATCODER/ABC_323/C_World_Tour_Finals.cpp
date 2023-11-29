@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,48 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
-    }
 
-    out[node]=timer++;
-}
+
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
-    }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
-    }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
+    ll n,m;
+    cin>>n>>m;
+    vector<ll> v(m);
+    inpv(v);
+    vector<ll> score;
+    vector<vector<pll>> left(n);
+    fr(i,n){
+        ll scoreS=i+1;
+        fr(j,m){
+            char ch;
+            cin>>ch;
+            if(ch=='o'){
+                scoreS+=v[j];
+            }else{
+                left[i].pb({v[j],j});
+            }
         }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
+        sort(all(left[i]),greater<pll>());
+        score.pb(scoreS);
     }
-
+    vector<ll> ans;
+    ll mx=*max_element(all(score));
+    // cout<<mx<<endl;
+    fr(i,n){
+        ll cnt=0;
+        ll curr=score[i];
+        for(ll j=0;j<left[i].size();++j){
+            if(curr>=mx)break;
+            cnt++;
+            curr+=v[left[i][j].ss];
+        }
+        ans.pb(cnt);
+    }
+    for(auto &i:ans){
+        cout<<i<<endl;
+    }
 }
 
 
@@ -104,13 +84,10 @@ int main(){
 fast_io;
 
 ll q=1;
-cin>>q;
+// cin>>q;
 for(ll i=0;i<q;i++){
     solve();
 }
     return 0;
 }
-
-
-
 

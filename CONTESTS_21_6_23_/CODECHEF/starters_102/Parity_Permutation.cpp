@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,87 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
-    }
 
-    out[node]=timer++;
-}
+
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
-    }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
-    }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
+    ll n,k;
+    cin>>n>>k;
+    vector<ll> v(n);
+    inpv(v);
+    ll odd=0,even=0;
+    vector<ll> O,E;
+    for(auto &i:v){
+        if(i%2){
+            odd++;
+            O.pb(i);
         }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
+        else{
+            even++;
+            E.pb(i);
+        }
     }
-
+    if(k==0){
+        if(odd>0 && even>0){
+            cout<<0<<endl;
+            return;
+        }
+        ll ans=1;
+        ll mx=max(even,odd);
+        for(ll i=0;i<n;++i){
+            ans=(ans*mx)%modval;
+            mx--;
+        }
+        cout<<ans<<endl;
+    }else{
+        ll ans=0;
+        ll fin=0;
+        vector<ll> temp;
+        ll ok=0;
+        // 0 pe odd and 1 pe even
+        ll oddpos=(n+1)/2;
+        ll evenpos=n-oddpos;
+        ll oriodd=odd;
+        ll orieven=even;
+        if(oddpos==odd && evenpos==even){
+            ans=1;
+            ok=1;
+            for(ll i=0;i<n;i+=2){
+                ans=(ans*odd)%modval;
+                odd--;
+            }
+            for(ll i=1;i<n;i+=2){
+                ans=(ans*even)%modval;
+                even--;
+            }
+        }
+        fin=ans;
+        //cout<<fin<<endl;
+        ans=0;
+        odd=oriodd;
+        even=orieven;
+        //cout<<oddpos<<" "<<even<<" "<<evenpos<<" "<<odd<<endl;
+        if(oddpos==even && evenpos==odd){
+            ans=1;
+            ok=1;
+            for(ll i=1;i<n;i+=2){
+                ans=(ans*odd)%modval;
+                odd--;
+            }
+            for(ll i=0;i<n;i+=2){
+                ans=(ans*even)%modval;
+                even--;
+            }
+        }
+        fin=(fin+ans)%modval;
+        if(ok==0){
+            cout<<0<<endl;
+            return;
+        }
+        cout<<fin<<endl;
+    }
 }
 
 
@@ -110,7 +129,4 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
-
-
-
 

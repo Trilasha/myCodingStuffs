@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,64 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
-    }
 
-    out[node]=timer++;
-}
+
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
+    ll n,k;
+    cin>>n>>k;
+    vector<vector<ll>> v(k);
+    string s;
+    cin>>s;
+    for(ll i=0;i<n;++i){
+        v[(i+1)%k].pb(s[i]-'0');
     }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
-    }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
+    ll ans=INT_MAX;
+    //all zero
+    ll ok=0;
+    ll chk=0;
+    for(ll i=0;i<k;++i){
+        // ll sz=v[i].size();
+        ll zero=0,one=0;
+        if(v[i].size()==0)continue;
+        for(ll j=0;j<v[i].size();++j){
+            if(v[i][j]==0)zero++;
+            else one++;
+        }
+        if(one==1 && zero==0){
+            chk=-1;
             continue;
         }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
+        if(one%2){
+            ok+=(one/2);
+            ok+=2;
+        }else{
+            ok+=(one/2);
+        }
     }
-
+    if(chk!=-1)ans=ok;
+    chk=0;
+    ok=0;
+    for(ll i=0;i<k;++i){
+        // ll sz=v[i].size();
+        ll zero=0,one=0;
+        if(v[i].size()==0)continue;
+        for(ll j=0;j<v[i].size();++j){
+            if(v[i][j]==0)zero++;
+            else one++;
+        }
+        if(one==0){
+            chk=-1;
+        }else{
+            ok+=zero;
+        }
+    }
+    if(chk!=-1){
+        ans=min(ok,ans);
+    }
+    cout<<ans<<endl;
 }
 
 
@@ -110,7 +106,4 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
-
-
-
 
