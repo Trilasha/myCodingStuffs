@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,47 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
-    }
 
-    out[node]=timer++;
-}
+
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
+    ll n,k;
+    cin>>n>>k;
+    ll mn=2*(n/2)+(n/2);
+    if(mn>k){
+        cout<<-1<<endl;
+        return;
     }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
+    vector<ll> v(n);
+    for(ll i=0;i<n;i+=2){
+        v[i]=1;
+        v[i+1]=2;
+        k-=3;
     }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
+    if(k%2){
+        cout<<-1<<endl;
+        return;
     }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
+    sort(all(v));
+    for(ll i=0;i<n;++i){
+        ll rem=100000-v[i];
+        ll pos=rem/2;
+        if(k>(2*pos)){
+            v[i]+=pos*2;
+            k-=pos*2;
+        }else{
+            v[i]+=k;
+            k=0;
+            break;
         }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
     }
-
+    if(k>0){
+        cout<<-1<<endl;
+        return;
+    }
+    printv(v);
 }
 
 
@@ -110,7 +89,4 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
-
-
-
 

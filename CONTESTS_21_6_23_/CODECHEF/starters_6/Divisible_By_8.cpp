@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,79 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
-    }
 
-    out[node]=timer++;
-}
+
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
+    ll n;
+    cin>>n;
+    string s;
+    cin>>s;
+    if(n==1){
+        cout<<'8'<<endl;
+        return;
     }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
-    }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
-    }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
+    if(n==2){
+        ll val=stoll(s);
+        if(val%8==0){
+            cout<<s<<endl;
+        }else{
+            if(s[0]=='1'){
+                cout<<"16"<<endl;
+            }else if(s[0]=='2'){
+                cout<<24<<endl;
+            }else if(s[0]=='3'){
+                cout<<32<<endl;
+            }else if(s[0]=='4'){
+                cout<<48<<endl;
+            }else if(s[0]=='5'){
+                cout<<56<<endl;
+            }else if(s[0]=='6'){
+                cout<<64<<endl;
+            }else if(s[0]=='7'){
+                cout<<72<<endl;
+            }else if(s[0]=='8'){
+                cout<<80<<endl;
+            }else if(s[0]=='9'){
+                cout<<96<<endl;
+            }
         }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
+        return;
     }
-
+    string var="";
+    var+=s[n-3];
+    var+=s[n-2];
+    var+=s[n-1];
+    ll ans=3;
+    string add="",temp="";
+    for(ll i=0;i<=9;++i){
+        for(ll j=0;j<=9;++j){
+            for(ll k=0;k<=9;++k){
+                temp="";
+                temp+=char(i+'0');
+                temp+=char(j+'0');
+                temp+=char(k+'0');
+                ll val=stoll(temp);
+                if(val%8==0){
+                    //cout<<temp<<endl;
+                    ll ok=0;
+                    if(var[0]!=temp[0])ok++;
+                    if(var[1]!=temp[1])ok++;
+                    if(var[2]!=temp[2])ok++;
+                    if(ok<=ans){
+                        ans=ok;
+                        add=temp;
+                    }
+                }
+            }
+        }
+    }
+    s[n-3]=add[0];
+    s[n-2]=add[1];
+    s[n-1]=add[2];
+    cout<<s<<endl;
 }
 
 
@@ -110,7 +121,4 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
-
-
-
 

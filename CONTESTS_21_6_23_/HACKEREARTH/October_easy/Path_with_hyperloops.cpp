@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,63 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
+
+
+vector<ll> dijkstra(vector<vector<pair<ll,ll>>> &adj,ll n,ll S){
+    priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>> pq;
+    vector<ll> dis(n + 1, 1e18);
+    vector<ll> parent(n + 1);
+ 
+    for (ll i = 1; i <= n; ++i)
+        parent[i] = i;
+ 
+    dis[S] = 0;
+    pq.push({0, S});
+ 
+    while (!pq.empty()){
+        ll distance = pq.top().first;
+        ll node = pq.top().second;
+        pq.pop();
+
+        //trying to add the set erase functionality somehow (though tc remains the same for both pq and set)
+        if(distance>dis[node]) continue;
+
+        for (auto &i : adj[node])
+        {
+            ll childNode = i.first;
+            ll edgeWeight = i.second;
+            if (distance + edgeWeight < dis[childNode])
+            {
+                dis[childNode] = distance + edgeWeight;
+                pq.push({dis[childNode], childNode});
+                parent[childNode] = node;
+            }
+        }
     }
-
-    out[node]=timer++;
+  return dis;
 }
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
-    }
-   
-    for(ll i=0;i<n-1;i++){
+    ll n,m,k,start,end;
+    cin>>n>>m>>k>>start>>end;
+    vector<vector<pll>> adj(n+1);
+    fr(i,m){
         ll x,y;
         cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
+        adj[x].pb({y,1});
+        adj[y].pb({x,1});
     }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
+    fr(i,k){
+        ll x,y;
+        cin>>x>>y;
+        adj[x].pb({y,2});
+        adj[y].pb({x,2});
     }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
-        }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
-    }
-
+    vector<ll> dis=dijkstra(adj,n,start);
+    ll ans=dis[end];
+    cout<<((ans==1e18)?-1:ans)<<endl;
 }
 
 
@@ -104,13 +99,10 @@ int main(){
 fast_io;
 
 ll q=1;
-cin>>q;
+// cin>>q;
 for(ll i=0;i<q;i++){
     solve();
 }
     return 0;
 }
-
-
-
 

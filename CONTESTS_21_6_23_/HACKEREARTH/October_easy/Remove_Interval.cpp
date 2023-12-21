@@ -1,3 +1,5 @@
+/* Trilasha Mazumder */
+
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -32,70 +34,60 @@ using namespace std;
 /*----------------------------------------------------------------------------------------------------------- */
 
 
-vector<ll> cost,in,out,depth,euler,dp;
-vector<vector<ll>> adj,v,pref_sum;
-ll timer=1;
 
 
-void dfs(ll node,ll par,ll dist){
-    euler.pb(node);
-    in[node]=timer++;
-    dp[node]=cost[node];
-    depth[node]=dist;
-    for(auto i:adj[node]){
-        if(i==par) continue;
-        dfs(i,node,dist+1);
-        dp[node]+=dp[i];
+
+
+class BIT{
+    vector<ll> bit;
+public:
+    BIT(ll n)
+    {
+        bit.resize(n+1,0);
     }
-
-    out[node]=timer++;
-}
+    void update(ll x, ll val,ll n)
+    {
+        for(; x <= n; x += x&-x)
+            bit[x] += val;
+    }
+    ll query(ll x)
+    {
+        ll sum = 0;
+        for(; x > 0; x -= x&-x)
+            sum += bit[x];
+        return sum;
+    }
+};
 
 void solve(){
-    ll n,q;
-    cin>>n>>q;
-    euler.clear();
-    cost.resize(n+1);
-    adj.assign(n+1,vector<ll>());
-    v.assign(n+1,vector<ll>());
-    pref_sum.assign(n+1,vector<ll>());
-    in.assign(n+1,0);
-    out.assign(n+1,0);
-    depth.assign(n+1,0);
-    dp.assign(n+1,0);
-
-    for(ll i=1;i<=n;++i){
-        cin>>cost[i];
+    ll n;
+    cin>>n;
+    vector<pll> v;
+    ll mx=0;
+    for(ll i=0;i<n;++i){
+        ll a,b;
+        cin>>a>>b;
+        v.pb({a,b});
+        mx=max(mx,b);
     }
-   
-    for(ll i=0;i<n-1;i++){
-        ll x,y;
-        cin>>x>>y;
-        adj[x].pb(y);
-        adj[y].pb(x);
+    // cout<<mx<<endl;
+    sort(all(v));
+    BIT bt(mx+1);
+    ll ans=INT_MAX;
+    for(ll i=0;i<n;++i){
+        ll a=v[i].ff;
+        ll b=v[i].ss;
+        bt.update(a,1,mx+1);
+        bt.update(b+1,-1,mx+1);
     }
-    dfs(1,0,0);
-    for(auto &i:euler){
-        v[depth[i]].pb(in[i]);
-        pref_sum[depth[i]].pb(dp[i]+((pref_sum[depth[i]].empty())?0:pref_sum[depth[i]].back()));
+    ans=INT_MAX;
+    for(ll i=0;i<n;++i){
+        ll qu1=bt.query(v[i].ff);
+        ll qu2=bt.query(v[i].ss);
+        // cout<<qu1<<" "<<qu2<<endl;
+        ans=min(ans,max(max(0LL,qu1-1),max(0LL,qu2-1)));
     }
-
-    while(q--){
-        ll node,dist;
-        cin>>node>>dist;
-        if(dist<depth[node]){
-            cout<<0<<endl;
-            continue;
-        }
-        ll ans=dp[node];
-        ll ind1=lower_bound(all(v[dist+1]),in[node])-v[dist+1].begin();
-        ll ind2=lower_bound(all(v[dist+1]),out[node])-v[dist+1].begin();
-        ind2--;
-        if(ind1<=ind2)
-        ans-=pref_sum[dist+1][ind2]-((ind1==0)?0:pref_sum[dist+1][ind1-1]);
-        cout<<ans<<endl;
-    }
-
+    cout<<ans<<endl;
 }
 
 
@@ -104,13 +96,10 @@ int main(){
 fast_io;
 
 ll q=1;
-cin>>q;
+// cin>>q;
 for(ll i=0;i<q;i++){
     solve();
 }
     return 0;
 }
-
-
-
 
