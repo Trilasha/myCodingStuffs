@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"xiosbase": "cpp",
+			"ostream": "cpp",
+			"algorithm": "cpp",
+			"xhash": "cpp",
+			"xtree": "cpp"
+		}
+	}
+}

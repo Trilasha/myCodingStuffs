@@ -1,0 +1,1 @@
+{"name":"Local: E2","url":"/home/trilasha/CP_ZONE/myCodingStuffs/starters8/E2.cpp","tests":[{"id":1697173463403,"input":"4 4\n1 4 2 3\n1 3 5 1\n4 3 10 11\n3 2 8 1\n4\n2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/trilasha/CP_ZONE/myCodingStuffs/starters8/E2.cpp","group":"local","local":true}

@@ -38,15 +38,18 @@ using namespace std;
 
 
 
-
 void solve(){
-    
+
+ 
 }
 
 
 int main(){
 
 fast_io;
+
+// freopen("input.txt", "r", stdin);
+// freopen("output.txt", "w", stdout);
 
 ll q=1;
 cin>>q;
