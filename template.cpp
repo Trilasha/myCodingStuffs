@@ -1,8 +1,8 @@
-/*
-    When talent doesn't work hard then hardwork beats talent...
-    ...hardwork always pays off
+/** zoobie doobie zoobie doobie pampaaa raa 
+ *  zoobie doobie parampaaaaa
+ *  zoobie doobie zoobie doobie nacheeeeee
+ *  kyuuuu pagal stupid mind
 */
-
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -33,18 +33,17 @@ using namespace std;
 #define bpl(n)                __builtin_popcountll(n);
 #define md                    998244353
 #define modval                1000000007
-//#define endl                " \n"
+#define endl                " \n"
 /*----------------------------------------------------------------------------------------------------------- */
 // insead of bpow use shift operators when b=2 to avoid tle 
 // do not perform more than one optimal choice/ops in a single step/loop otherwise break your head with WA
-
+/*----------------------------------------------------------------------------------------------------------- */
 
 
 
 
 void solve(){
 
- 
 }
 
 
@@ -62,4 +61,3 @@ for(ll i=0;i<q;i++){
 }
     return 0;
 }
-

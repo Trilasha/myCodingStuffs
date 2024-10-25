@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flocking Simulation</title>
+<style>
+body { margin: 0; }
+canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const numBoids = 150;
+const boids = [];
+
+class Boid {
+    constructor() {
+        this.position = { x: Math.random() * canvas.width, y: Math.random() * canvas.height };
+        this.velocity = { x: (Math.random() - 0.5) * 4, y: (Math.random() - 0.5) * 4 };
+        this.acceleration = { x: 0, y: 0 };
+        this.maxSpeed = 3;
+        this.perceptionRadius = 50;
+    }
+
+    update() {
+        this.flock(boids);
+        this.velocity.x += this.acceleration.x;
+        this.velocity.y += this.acceleration.y;
+        this.limitSpeed();
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+        this.edges();
+        this.acceleration.x = 0;
+        this.acceleration.y = 0;
+    }
+
+    flock(boids) {
+        let alignment = { x: 0, y: 0 };
+        let cohesion = { x: 0, y: 0 };
+        let separation = { x: 0, y: 0 };
+        let total = 0;
+        for (let other of boids) {
+            let distance = this.distanceTo(other);
+            if (other != this && distance < this.perceptionRadius) {
+                alignment.x += other.velocity.x;
+                alignment.y += other.velocity.y;
+                cohesion.x += other.position.x;
+                cohesion.y += other.position.y;
+                separation.x += (other.position.x - this.position.x) / distance;
+                separation.y += (other.position.y - this.position.y) / distance;
+                total++;
+            }
+        }
+        if (total > 0) {
+            alignment.x /= total;
+            alignment.y /= total;
+            cohesion.x = (cohesion.x / total) - this.position.x;
+            cohesion.y = (cohesion.y / total) - this.position.y;
+            separation.x /= total;
+            separation.y /= total;
+            this.acceleration.x += alignment.x * 0.5 + cohesion.x * 0.1 - separation.x * 1.5;
+            this.acceleration.y += alignment.y * 0.5 + cohesion.y * 0.1 - separation.y * 1.5;
+        }
+    }
+
+    limitSpeed() {
+        const speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
+        if (speed > this.maxSpeed) {
+            this.velocity.x = (this.velocity.x / speed) * this.maxSpeed;
+            this.velocity.y = (this.velocity.y / speed) * this.maxSpeed;
+        }
+    }
+
+    edges() {
+        if (this.position.x > canvas.width) this.position.x = 0;
+        if (this.position.x < 0) this.position.x = canvas.width;
+        if (this.position.y > canvas.height) this.position.y = 0;
+        if (this.position.y < 0) this.position.y = canvas.height;
+    }
+
+    distanceTo(other) {
+        const dx = this.position.x - other.position.x;
+        const dy = this.position.y - other.position.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+}
